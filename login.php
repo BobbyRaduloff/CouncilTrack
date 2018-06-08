@@ -25,7 +25,7 @@
 
 		$stmt = $conn->prepare("SELECT password, level FROM users WHERE username = ?");
 		if(!$stmt) {
-			die("Failed to communicate with database!");
+			goto wrong;
 		}
 		$stmt->bind_param("s", $_POST["username"]);
 		$stmt->execute();
@@ -38,6 +38,7 @@
 			$_SESSION["level"] = $level;
 			header("Location: index.php");
 		} else {
+			wrong:
 			echo "<img src=\"data\\wrong.webp\">";
 		}
 
