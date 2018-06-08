@@ -1,0 +1,10 @@
+# Remove '#' when in production
+# IndexIgnore *
+
+# those files shouldn't be shown to the end-user
+<files "README.md">
+	deny from all
+</files>
+<FilesMatch "^\.">
+	deny from all
+</FilesMatch>
