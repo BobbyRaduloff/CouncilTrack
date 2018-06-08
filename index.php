@@ -13,15 +13,16 @@
 	<h3> Council Track </h3>
 	<hr>
 	<?php if(isset($_SESSION['username'])) : ?>
-			<?php if(isset($_SESSION['level']))
-			switch ($_SESSION['level']) {
-				case 0:
-					header('Location: admin.php');
-					break;
-				
-				default:
-					header('use.php');
-					break;
+			<?php if(isset($_SESSION['level'])) {
+				switch ($_SESSION['level']) {
+					case 0:
+						header('Location: admin.php');
+						break;
+					
+					default:
+						header('use.php');
+						break;
+				}
 			}
 		?>
 	<?php else : ?>

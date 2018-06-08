@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h3> placeholder </h3>
+	<?php session_start(); session_destroy(); ?>
 </body>
 </html>
