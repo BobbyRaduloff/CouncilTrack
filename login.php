@@ -8,21 +8,14 @@
 </head>
 <body>
 <?php
-	$db_servername = "localhost";
-	$db_username = "root";
-	$db_password = "password";
-	$db_name	= "counciltrack";
+	include "connect.php";
 
 	if(empty($_POST["username"])) {
-		echo "<h3> You forgot the username... </h3>";
+		die("<h3> You forgot the username... </h3>");
 	} elseif (empty($_POST["password"])) {
-		echo "<h3> You forgot the password... </h3>";
+		die("<h3> You forgot the password... </h3>");
 	} else {
-		$conn = new mysqli($db_servername, $db_username, $db_password, $db_name);
-		if($conn->connect_error) {
-			die("Connection failed!");
-		}
-
+		$conn = connect();
 		$stmt = $conn->prepare("SELECT password, level FROM users WHERE username = ?");
 		if(!$stmt) {
 			goto wrong;
@@ -31,6 +24,7 @@
 		$stmt->execute();
 		$stmt->bind_result($real_pass, $level);
 		$stmt->fetch();
+		
 		if(password_verify($_POST["password"], $real_pass)){ 
 			echo "<h3> Success! </h3>";
 			session_start();
