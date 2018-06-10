@@ -13,11 +13,13 @@
 	<h3> Council Track </h3>
 	<hr>
 	<?php if(isset($_SESSION['username'])) : ?>
-		<?php if($_SESSION['level'] == 2) : ?>
+		<?php if($_SESSION['level'] <= 2) : ?>
 
-		<?php elseif($_SESSION['level'] == 1) : ?>
+		<?php endif; ?>
+		<?php if($_SESSION['level'] <= 1) : ?>
 
-		<?php elseif($_SESSION['level'] == 0) : ?>
+		<?php endif; ?>
+		<?php if($_SESSION['level'] == 0) : ?>
 			<h4> Create New User: </h4>
 			<form action="new_user.php" method="post" accept-charset="utf-8">
 				<label for="new_username"> Username: </label>
