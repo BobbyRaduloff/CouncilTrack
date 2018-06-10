@@ -17,8 +17,10 @@
 
 		if(empty($_POST["new_username"])) {
 			die("<h3> You forgot the username... </h3>");
+			again();
 		} elseif (empty($_POST["new_password"])) {
 			die("<h3> You forgot the password... </h3>");
+			again();
 		} else {
 			$conn = connect();
 			$stmt = $conn->prepare("INSERT INTO users (username, password, level) VALUES (?, ?, ?)");

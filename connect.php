@@ -18,4 +18,8 @@
 			die("<h3> You don't have the correct permissions! </h3>");
 		}
 	}
+
+	function again() {
+		die("<input type=\"submit\" class=\"btn btn-primary\" value=\"Try Again\" onclick=\"window.location='index.php';\">");
+	}
 ?>

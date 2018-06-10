@@ -12,10 +12,6 @@
 <?php
 	include "connect.php";
 
-	function again() {
-		die("<input type=\"submit\" class=\"btn btn-primary\" value=\"Try Again\" onclick=\"window.location='index.php';\">");
-	}
-
 	if(empty($_POST["username"])) {
 		echo "<h3> You forgot the username... </h3>";
 		again();
