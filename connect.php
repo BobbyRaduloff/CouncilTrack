@@ -12,4 +12,10 @@
 
 		return $conn;
 	}
+
+	function check() {
+		if($_SESSION['level'] != 0) {
+			die("<h3> You don't have the correct permissions! </h3>");
+		}
+	}
 ?>

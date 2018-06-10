@@ -13,9 +13,7 @@
 		include "connect.php";
 
 		session_start();
-		if($_SESSION['level'] != 0) {
-			die("<h3> You don't have the correct permissions! </h3>");
-		}
+		check();
 
 		if(empty($_POST["new_username"])) {
 			die("<h3> You forgot the username... </h3>");

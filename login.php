@@ -12,10 +12,16 @@
 <?php
 	include "connect.php";
 
+	function again() {
+		die("<input type=\"submit\" class=\"btn btn-primary\" value=\"Try Again\" onclick=\"window.location='index.php';\">");
+	}
+
 	if(empty($_POST["username"])) {
-		die("<h3> You forgot the username... </h3>");
+		echo "<h3> You forgot the username... </h3>";
+		again();
 	} elseif (empty($_POST["password"])) {
 		die("<h3> You forgot the password... </h3>");
+		again();
 	} else {
 		$conn = connect();
 		$stmt = $conn->prepare("SELECT password, level FROM users WHERE username = ?");
@@ -36,6 +42,8 @@
 		} else {
 			wrong:
 			echo "<img src=\"data\\wrong.webp\">";
+			echo "<br><br>";
+			again();
 		}
 
 		$stmt->close();

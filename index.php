@@ -40,10 +40,36 @@
 				<br>
 				<button type="submit" class="btn btn-primary"> Create </button>
 			</form>
+			<hr>
+			<h4> Delete Existing User: </h4>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th> Username </th>
+						<th> Admin </th>
+						<th> </th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+						include "connect.php";
+
+						$conn = connect();
+						$stmt = $conn->prepare("SELECT id, username, level from users WHERE level > 0");
+						$stmt->execute();
+						$stmt->bind_result($id, $username, $level);
+						while($stmt->fetch()) {
+							$admin = ($level < 2) ? "Yes" : "No";
+							$delete = "<form action=\"delete_user.php\" method=\"post\" accept-charset=\"utf-8\"> <button name=\"delete\" class=\"btn btn-danger\" type=\"submit\" value=\"$id\"> Delete </form>";
+							echo "<tr> <td> $username </td> <td> $admin </td> <td> $delete </td> </tr>";
+						}
+					?>
+				</tbody>
+			</table>
 		<?php endif; ?>
 		<hr>
 			<form action="logout.php" method="post" accept-charset="utf-8">
-			<button type="submit" class="btn btn-danger"> Log Out </button>
+			<button type="submit" class="btn btn-warning"> Log Out </button>
 		</form>
 	<?php else : ?>
 		<h4> Login </h4>
