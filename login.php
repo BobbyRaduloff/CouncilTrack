@@ -6,6 +6,7 @@
 	<title> CouncilTrack: Login </title>
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<link rel="icon" type="image/x-icon" href="data/favicon.ico">
 </head>
 <body>
 <?php

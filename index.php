@@ -9,6 +9,7 @@
 	<title> CouncilTrack </title>
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<link rel="icon" type="image/x-icon" href="data/favicon.ico">
 </head>
 <body>
 	<h3> Council Track </h3>
@@ -18,9 +19,10 @@
 
 		<?php endif; ?>
 		<?php if($_SESSION['level'] <= 1) : ?>
-
+			<hr>
 		<?php endif; ?>
 		<?php if($_SESSION['level'] == 0) : ?>
+			<hr>
 			<h4> Create New User: </h4>
 			<form action="new_user.php" method="post" accept-charset="utf-8">
 				<div class="form-group">
@@ -54,7 +56,6 @@
 				<label for="password"> Password:&nbsp; </label>
 				<input type="password" class="form-control" name="password" maxlength="128">
 			</div>
-			<br>
 			<button type="submit" class="btn btn-primary"> Log In </button>
 		</form>
 	<?php endif; ?>
