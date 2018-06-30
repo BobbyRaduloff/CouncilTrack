@@ -10,38 +10,50 @@
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
 	<link rel="icon" type="image/x-icon" href="data/favicon.ico">
-	<script type="text/javascript" src="template.js"></script>
 </head>
 <body>
-	<h3> Council Track </h3>
-	<hr>
+	<h1> Council Track </h1>
+	<hr style="height: 5px; background-color: #333;">
 	<?php if(isset($_SESSION['username'])) : ?>
 		<?php if($_SESSION['level'] <= 2) : ?>
-
+			<h2> Make a Transaction </h2>
 		<?php endif; ?>
 		<?php if($_SESSION['level'] <= 1) : ?>
-			<hr>
-			<h4> Create a new Template: </h4>
+			<hr style="height: 2px; background-color: #333;">
+			<h2> Sales and Information</h2>
+			<hr style="height: 2px; background-color: #333;">
+			<h4> Create a New Template: </h4>
 			<form action="new_template.php" method="post" accept-charset="utf-8">
 				<div class="form-group">
 					<label for="template_name"> Name: </label>
 					<input type="text" class="form-control" name="template_name" maxlength="128">
 				</div>
+				<div class="form-group">
+					<label for="template_num"> Number of Items: </label>
+					<input id="t_num" type="number" class="form-control name="template_num" min="1" max="20" oninput="document.getElementById('items').innerHTML = ''; for (var i = 0; i < document.getElementById('t_num').value; i++) { name = 'template_item' + i; price = 'template_price' + i; document.getElementById('items').innerHTML += `<tr> <td> <input type\'text\' class=\'form-control\' name=${name} maxlength=\'128\'> </td> <td> <input type=\'number\' class=\'form-control\' name=${price} min=\'1\' max=\'100\'> </td> </tr>`; }">
+				</div>
 				<table class="table table-hover">
 					<thead>
-						<tr> Item </tr>
-						<tr> Price </tr>
-						<th> </th>
+						<tr>
+							<th> Item Name </th>
+							<th> Price (Leva) </th>
+							<th> </th>
+						</tr>
 					</thead>
-					<tbody>
-						<script type="text/javascript"> print_fields(); </script>
+					<tbody id="items">
+
 					</tbody>
 				</table>
+				<button type="submit" class="btn btn-primary"> Create </button>
 			</form>
+			<hr>
+			<h4> View Data </h4>
 		<?php endif; ?>
 		<?php if($_SESSION['level'] == 0) : ?>
-			<hr>
-			<h4> Create New User: </h4>
+			<hr style="height: 2px; background-color: #333;">
+			<h2> User Management </h2>
+			<hr style="height: 2px; background-color: #333;">
+			<h4> Create a New User: </h4>
 			<form action="new_user.php" method="post" accept-charset="utf-8">
 				<div class="form-group">
 					<label for="new_username"> Username: </label>
@@ -59,7 +71,7 @@
 				<button type="submit" class="btn btn-primary"> Create </button>
 			</form>
 			<hr>
-			<h4> Delete Existing User: </h4>
+			<h4> Delete a Existing User: </h4>
 			<table class="table table-hover">
 				<thead>
 					<tr>
