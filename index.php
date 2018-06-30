@@ -20,6 +20,14 @@
 		<?php endif; ?>
 		<?php if($_SESSION['level'] <= 1) : ?>
 			<hr>
+			<h4> Create a new Template: </h4>
+			<form action="new_template.php" method="post" accept-charset="utf-8">
+				<div class="form-group">
+					<label for="template_name"> Name: </label>
+					<input type="text" class="form-control" name="template_name" maxlength="128">
+				</div>
+
+			</form>
 		<?php endif; ?>
 		<?php if($_SESSION['level'] == 0) : ?>
 			<hr>
@@ -60,7 +68,7 @@
 						$stmt->bind_result($id, $username, $level);
 						while($stmt->fetch()) {
 							$admin = ($level < 2) ? "Yes" : "No";
-							$delete = "<form action=\"delete_user.php\" method=\"post\" accept-charset=\"utf-8\"> <button name=\"delete\" class=\"btn btn-danger\" type=\"submit\" value=\"$id\"> Delete </form>";
+							$delete = "<button name=\"delete\" class=\"btn btn-danger\" onclick=\"if(confirm('Really?')) { var http = new XMLHttpRequest(); http.open('POST', 'delete_user.php', true); http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded'); http.send('delete=$id'); location.reload();} \"> Delete </button>";
 							echo "<tr> <td> $username </td> <td> $admin </td> <td> $delete </td> </tr>";
 						}
 					?>
