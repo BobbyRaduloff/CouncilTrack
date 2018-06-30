@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
 	<link rel="icon" type="image/x-icon" href="data/favicon.ico">
+	<script type="text/javascript" src="template.js"></script>
 </head>
 <body>
 	<h3> Council Track </h3>
@@ -26,7 +27,16 @@
 					<label for="template_name"> Name: </label>
 					<input type="text" class="form-control" name="template_name" maxlength="128">
 				</div>
-
+				<table class="table table-hover">
+					<thead>
+						<tr> Item </tr>
+						<tr> Price </tr>
+						<th> </th>
+					</thead>
+					<tbody>
+						<script type="text/javascript"> print_fields(); </script>
+					</tbody>
+				</table>
 			</form>
 		<?php endif; ?>
 		<?php if($_SESSION['level'] == 0) : ?>
