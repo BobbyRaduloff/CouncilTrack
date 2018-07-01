@@ -10,6 +10,16 @@
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
 	<link rel="icon" type="image/x-icon" href="data/favicon.ico">
+	<script type="text/javascript">
+		function change_items() {
+			document.getElementById('items').innerHTML = '';
+			for (var i = 0; i < document.getElementById('t_num').value; i++) {
+				tname = 'template_item' + i;
+				tprice = 'template_price' + i;
+				document.getElementById('items').innerHTML += '<tr> <td> <input type\'text\' class=\'form-control\' name=\'' + tname + '\' maxlength=\'128\'> </td> <td> <input type=\'number\' class=\'form-control\' name=\'' + tprice + '\' min=\'1\' max=\'100\'> </td> </tr>'
+			}
+		}
+	</script>
 </head>
 <body>
 	<h1> Council Track </h1>
@@ -30,7 +40,7 @@
 				</div>
 				<div class="form-group">
 					<label for="template_num"> Number of Items: </label>
-					<input id="t_num" type="number" class="form-control name="template_num" min="1" max="20" oninput="document.getElementById('items').innerHTML = ''; for (var i = 0; i < document.getElementById('t_num').value; i++) { name = 'template_item' + i; price = 'template_price' + i; document.getElementById('items').innerHTML += `<tr> <td> <input type\'text\' class=\'form-control\' name=${name} maxlength=\'128\'> </td> <td> <input type=\'number\' class=\'form-control\' name=${price} min=\'1\' max=\'100\'> </td> </tr>`; }">
+					<input id="t_num" type="number" class="form-control" name="template_num" min="1" max="20" oninput="change_items()">
 				</div>
 				<table class="table table-hover">
 					<thead>
@@ -41,7 +51,6 @@
 						</tr>
 					</thead>
 					<tbody id="items">
-
 					</tbody>
 				</table>
 				<button type="submit" class="btn btn-primary"> Create </button>
