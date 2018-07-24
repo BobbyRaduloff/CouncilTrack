@@ -14,4 +14,8 @@ Then, go to [here](https://github.com/BobbyRaduloff/CouncilTrack/compare) and ch
 
 Create a pull request and write a good description of what you added.
 
+Don't forget to go bck to master after you are done:
+
+ `git checkout master`
+
 Merging the PR to master and fixing any conflicts will be done by the maintainer.
