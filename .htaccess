@@ -5,6 +5,9 @@
 <files "README.md">
 	deny from all
 </files>
+<files "CONTRIBUTING.md">
+	deny from all
+</files>
 <FilesMatch "^\.">
 	deny from all
 </FilesMatch>
