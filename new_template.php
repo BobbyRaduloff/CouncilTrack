@@ -13,7 +13,7 @@
 		include "connect.php";
 
 		session_start();
-		check();
+		check(1);
 
 		if(empty($_POST["template_name"])) {
 			die("<h3> You forgot the name... </h3>");

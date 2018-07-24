@@ -13,7 +13,7 @@
 		include "connect.php";
 
 		session_start();
-		check();
+		check(0);
 
 		if(empty($_POST["new_username"])) {
 			die("<h3> You forgot the username... </h3>");

@@ -12,7 +12,7 @@
 	<?php
 		include "connect.php";
 		session_start();
-		check();
+		check(0);
 
 		$conn = connect();
 		$stmt = $conn->prepare("DELETE FROM users where id = ?");

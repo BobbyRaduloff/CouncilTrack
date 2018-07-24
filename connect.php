@@ -12,8 +12,8 @@
 		return $conn;
 	}
 
-	function check() {
-		if($_SESSION['level'] != 0) {
+	function check($level) {
+		if($_SESSION['level'] > $level) {
 			die("<h3> You don't have the correct permissions! </h3>");
 		}
 	}
