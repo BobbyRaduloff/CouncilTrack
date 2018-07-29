@@ -16,7 +16,7 @@
 		echo "<h3> You forgot the username... </h3>";
 		again();
 	} elseif (empty($_POST["password"])) {
-		die("<h3> You forgot the password... </h3>");
+		echo "<h3> You forgot the password... </h3>";
 		again();
 	} else {
 		$conn = connect();

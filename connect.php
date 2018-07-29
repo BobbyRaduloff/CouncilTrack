@@ -18,6 +18,12 @@
 		}
 	}
 
+	function check_login() {
+		if(!isset($_SESSION['level'])) {
+			header("Location: index.php");
+		}
+	}
+
 	function again() {
 		die("<input type=\"submit\" class=\"btn btn-primary\" value=\"Try Again\" onclick=\"window.location='index.php';\">");
 	}

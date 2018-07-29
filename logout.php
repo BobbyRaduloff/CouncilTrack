@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title> CouncilTrack: New User </title>
+	<title> CouncilTrack: Log Out </title>
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
 	<link rel="icon" type="image/x-icon" href="data/favicon.ico">
