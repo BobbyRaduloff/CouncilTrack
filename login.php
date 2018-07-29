@@ -28,13 +28,12 @@
 		$stmt->execute();
 		$stmt->bind_result($real_pass, $level);
 		$stmt->fetch();
-		
-		if(password_verify($_POST["password"], $real_pass)){ 
-			echo "<h3> Success! </h3>";
+
+		if(password_verify($_POST["password"], $real_pass)){
 			session_start();
 			$_SESSION["username"] = $_POST["username"];
 			$_SESSION["level"] = $level;
-			header("Location: index.php");
+			header("Location: usage.php");
 		} else {
 			wrong:
 			echo "<img src=\"data\\wrong.webp\">";
