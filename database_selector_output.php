@@ -8,29 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="styles/style.css">
 		<!-- Temporary positioning until bootstrap !-->
 		<!-- Needs code witch which you doesn't allow you to enter this webpage without permission !-->
-		<style type = "text/css">
-			#view_button {
-			height: 2cm; width: 70%;
-			font-size: 24px;
-			position: relative; top: 50px; left: 70px;
-			}
-			.message {
-			position: relative; top: 100px;
-			font-size: 22px;
-			}
-			#content {
-			position: relative; top: 20px;
-			}
-			p {
-			font-size: 24px;
-			}
-			h2 {
-			text-align: center;
-			}
-			select {
-			width: 100%; height: 1cm;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="styles/database_selector_style.css">
 	</head>
 	<body>
 		<?php
@@ -49,7 +27,7 @@
 							include('database_selector.php');
 							?>
 				</select>
-				<button id = "view_button" name = "view_event"> View Event </button>
+				<button id = "action_button" name = "view_event"> View Event </button>
 			</form>
 			<br>
 			<p class = "message"> Note: The correct way to adress events is "EventName_Year". </p>

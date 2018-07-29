@@ -8,42 +8,7 @@
 		<title> Usage </title>
 		<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="styles/style.css">
-		<style>
-			button {
-			height: 6cm; width: 100%;
-			border: none; color: #013220;
-			}
-			#input_button {
-			position: relative; top: 100px; right: 350px;
-			font-size: 36px; color: white; background-color: #013220; letter-spacing: 6px; font-family: verdana;
-			}
-			#input_button:active {
-			background-color: #001F13;
-			}
-			#input_button:focus {
-			background-color: #001F13;
-			}
-			#output_button {
-			position: relative; bottom: 130px; left: 380px;
-			font-size: 36px; color: white; background-color: #8b0000;
-			letter-spacing: 6px; font-family: verdana;
-			}
-			#output_button:active {
-			background-color: #580000;
-			}
-			#output_button:focus {
-			background-color: #580000;
-			}
-			#back_button {
-			font-size: 72px;
-			}
-			#back_button:active {
-			background-color: lightgray;
-			}
-			h1 {
-			text-align: center;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="styles\usage_style.css">
 	</head>
 	<body>
 		<?php

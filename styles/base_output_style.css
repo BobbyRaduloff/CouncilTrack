@@ -1,0 +1,37 @@
+#delivered {
+position: relative; bottom: 35px;
+}
+#main_content {
+position: relative; top: 20px;
+}
+#section2 {
+position: relative; bottom: 20px;
+}
+#acquired {
+position: relative; bottom: 30px;
+}
+#profit {
+position: relative; bottom: 55px;
+}
+h2 {
+font-size: 48px;
+font-family: Bahnschrift Light ;
+}
+p {
+font-size: 36px;
+font-family: Bahnschrift Light ;
+}
+#view {
+position: relative; bottom: 70px;
+width: 100%; height: 2cm;
+font-size: 40px;
+background-color: #428442;
+letter-spacing: 1px; font-family: verdana;
+}
+#back {
+position: relative; bottom: 30px; left: 150px;
+width: 50%; height: 2cm;
+font-size: 40px;
+background-color: #ad2c27;
+letter-spacing: 1px; font-family: verdana;
+}
