@@ -8,7 +8,7 @@
 		<title> Usage </title>
 		<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="styles/style.css">
-		<link rel="stylesheet" type="text/css" href="styles\usage_style.css">
+		<link rel="stylesheet" type="text/css" href="styles\usage.css">
 	</head>
 	<body>
 		<?php
@@ -19,9 +19,9 @@
 			?>
 		<div class = "interface">
 			<form method="POST">
-				<button id = "input_button" name = "input">  Input Information </button>
-				<button id = "output_button"  name="output"> Output Of Databases </button>
-				<button id = "back_button"  name="back"> Back</button>
+				<button class = "btn btn-success" id = "input_button" name = "input">  Input Information </button>
+				<button class = "btn btn-danger" id = "output_button"  name="output"> Output Of Databases </button>
+				<button class = "btn btn-secondary" id = "back_button" name="back"> Back</button>
 			</form>
 		</div>
 		<?php

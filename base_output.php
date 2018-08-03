@@ -6,7 +6,7 @@
 		<title>Database Output</title>
 		<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="styles/style.css">
-		<link rel="stylesheet" type="text/css" href="styles/base_output_style.css">
+		<link rel="stylesheet" type="text/css" href="styles/base_output.css">
 	</head>
 	<body>
 		<?php

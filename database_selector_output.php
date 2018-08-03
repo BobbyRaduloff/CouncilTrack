@@ -27,7 +27,7 @@
 							include('database_selector.php');
 							?>
 				</select>
-				<button id = "action_button" name = "view_event"> View Event </button>
+				<button class = "btn btn-primary" id = "action_button" name = "view_event"> View Event </button>
 			</form>
 			<br>
 			<p class = "message"> Note: The correct way to adress events is "EventName_Year". </p>

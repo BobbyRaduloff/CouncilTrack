@@ -1,0 +1,61 @@
+.inter_form {
+line-height: 400%;
+}
+br {
+line-height: 150%;
+}
+p {
+font-size: 36px;
+}
+input[type = "text"] {
+font-size:32px;
+width: 100%; height: 2cm;
+}
+h1 {
+text-align: center;
+}
+#submit {
+position: relative; bottom: 380px; left: 40px;
+height: 1.8cm; width: 35%;
+font-size: 36px;
+}
+#back {
+position: relative; bottom: 380px; left: 140px;
+height: 1.8cm; width: 35%;
+font-size: 36px;
+}
+#first_digits {
+position: relative; bottom: 330px;
+text-align: center;
+font-size: 48px;
+width: 30%;
+}
+#seperator {
+font-size: 74px;
+position: relative; bottom: 420px; left: 205px;
+}
+#last_digits {
+position: relative; bottom: 500px; left: 250px;
+text-align: center;
+font-size: 48px;
+width: 30%;
+}
+#instructions {
+	text-align: center;
+}
+
+#name_first {
+position: relative; bottom: 470px;
+}
+#name_last {
+position: relative; bottom: 400px;
+}
+#buyer {
+position: relative; bottom: 420px;
+}
+#main_content {
+position: relative; bottom: 20px;
+}
+#adjust_position {
+position: relative; bottom: 10px;
+}

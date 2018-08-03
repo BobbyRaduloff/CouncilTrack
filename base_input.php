@@ -6,7 +6,7 @@
 		<title>Input Into Database</title>
 		<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="styles/style.css">
-		<link rel="stylesheet" type="text/css" href="styles/base_input_style.css">
+		<link rel="stylesheet" type="text/css" href="styles/base_input.css">
 	</head>
 	<body>
 		<div id = "adjust_position">

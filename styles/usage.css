@@ -1,0 +1,18 @@
+button {
+height: 6cm; width: 100%;
+font-size: 46px; letter-spacing: 6px;
+}
+
+#input_button {
+position: relative; top: 100px; right: 350px;
+font-size: 46px;
+}
+
+#output_button {
+position: relative; bottom: 130px; left: 380px;
+font-size: 46px;
+}
+
+#back_button {
+font-size: 70px;
+}
