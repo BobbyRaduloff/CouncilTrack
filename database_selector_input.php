@@ -6,33 +6,7 @@
 		<title> Event Selector  </title>
 		<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="styles/style.css">
-		<style type = "text/css">
-			#input_button {
-			height: 2cm; width: 70%;
-			font-size: 24px;
-			position: relative; top: 50px; left: 70px;
-			}
-			.message {
-			position: relative; top: 100px;
-			font-size: 22px;
-			}
-			#content {
-			position: relative; top: 20px;
-			}
-			p {
-			font-size: 24px;
-			}
-			h2 {
-			text-align: center;
-			}
-			select {
-			width: 100%; height: 1cm;
-			}
-			#selector{
-			height: 40px;
-			font-size:24px;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="styles/database_selector_style.css">
 	</head>
 	<body>
 		<?php
@@ -51,7 +25,7 @@
 							include('database_selector.php');
 							?>
 				</select>
-				<button id = "input_button" name = "input_event"> Input In Event </button>
+				<button class = "btn btn-primary" id = "action_button" name = "input_event"> Input In Event </button>
 			</form>
 			<br>
 			<p class = "message"> Note: The correct way to adress events is "EventName_Year". </p>
