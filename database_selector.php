@@ -2,5 +2,5 @@
 $test = "Test";
 
 echo
-"<option value = $test>Test</option>;"
+"<option value = '$test'>Test</option>;"
   ?>
