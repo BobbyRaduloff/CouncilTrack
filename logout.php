@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title> CouncilTrack: Log Out </title>
-	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="styles/style.css">
-	<link rel="icon" type="image/x-icon" href="data/favicon.ico">
-</head>
-<body>
-	<?php
+<?php
 		session_start();
 		session_unset();
 		if(ini_get("session.use_cookies")) {
@@ -19,5 +8,3 @@
 		session_destroy();
 		header("Location: index.php");
 	?>
-</body>
-</html>

@@ -1,0 +1,21 @@
+body {
+	max-width: 640px;
+}
+
+.form-ct {
+	max-width: 480px;
+	padding: 15px;
+	margin: 0 auto;
+}
+
+.form-heading {
+	margin-bottom: 10px;
+}
+
+.btn-final {
+	margin-top: 10px;
+}
+
+.selector {
+	margin: 15px;
+}

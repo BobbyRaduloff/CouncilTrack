@@ -3,25 +3,47 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title> CouncilTrack: New User </title>
-	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="styles/style.css">
-	<link rel="icon" type="image/x-icon" href="data/favicon.ico">
+	<title> CouncilTrack: Delete User </title>
+	<link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style/global.css">
 </head>
-<body>
-	<?php
-		include "connect.php";
-		session_start();
-		check(0);
+<body class="mx-auto">
+	<div class="container">
+		<?php
+			session_start();
+			include "header.html";
+			include "utils.php";
 
-		$conn = connect();
-		$stmt = $conn->prepare("DELETE FROM users where id = ?");
-		$stmt->bind_param("i", $_POST["delete"]);
-		$stmt->execute();
+			check_level(1);
+		?>
+		<form id="delete-user-form" class="form-ct" action="delete_user_db.php" method="post" accept-charset="utf-8">
+			<p class="h2 text-center form-heading"> Delete user </p>
+			<label for="id"> Username: </label>
+			<select class="selector" name="id" form="delete-user-form">
+				<?php 
+					$conn = db_connect();
+					$stmt = $conn->prepare("SELECT username, id FROM users WHERE 1");
+					if(!$stmt) {
+						echo "<p class=\"h3 text-center\"> Something went wrong. </p>";
+						try_again("delete_user.php");
+					}
+					$stmt->execute();
+					$stmt->bind_result($username, $id);
+					
+					while($stmt->fetch()) {
+						if($username != $_SESSION["username"]) {
+							echo "<option value=\"$id\"> $username </option>";
+						}
+					}
 
-		$stmt->close();
-		$conn->close();
-		header("Location: index.php");
-	?>
+					$stmt->close();
+					$conn->close();
+				?>
+			</select>
+			<button class="btn btn-lg btn-danger btn-block btn-final" type="submit"> Next </button>
+		</form>
+		<?php include "back.html"; ?>
+		<?php include "footer.html"; ?>
+	</div>	
 </body>
 </html>
