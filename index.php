@@ -25,5 +25,6 @@
 			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit"> Sign in</button>
 		</form>
 	</div>	
+	<?php include "footer.html"; ?>
 </body>
 </html>

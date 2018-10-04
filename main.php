@@ -50,6 +50,7 @@
 				<button class="btn btn-lg btn-warning btn-block" onclick="location.href='logout.php';"> Log Out </button>
 			</div>
 		</div>
-	</div>	
+		<?php include "footer.html"; ?>
+	</div>
 </body>
 </html>

@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="style/global.css">
 	<link rel="stylesheet" type="text/css" href="style/view_event.css">
+	<script type="text/javascript" src="js/view_event.js"></script>
 </head>
 <body class="mx-auto">
 	<div class="container">
@@ -22,6 +23,12 @@
 			$stmt->fetch();
 			echo "<div class=\"row\"> <div class=\"col mx-auto\"> <p class=\"h3 text-center pt-4\"> ${event_name} </p> </div> </div>"
 		?>
+		<form class="form-ct" method="post" accept-charset="utf-8">
+			<label for="query" class="col-sm-2 col-form-label"> Search: </label>
+			<div class="col-sm-10">
+				<input type="text" name="query" id="query" class="form-control" onchange="search();">
+			</div>
+		</form>
 		<div class="table-responsive">
 			<?php
 			session_start();
@@ -49,7 +56,7 @@
 				$item_array = array();
 				$same = intval($same);
 				$stmt->close();
-				echo "<table class=\"table table-striped\"> <thead class=\"thead-dark\">";
+				echo "<table class=\"table table-striped\" id=\"data\"> <thead class=\"thead-dark\">";
 				echo "<tr> <th scope=\"col\"> # </th>";
 				echo "<th scope=\"col\"> Buyer Name </th>";
 				echo "<th scope=\"col\"> Buyer Section </th>";
@@ -106,6 +113,9 @@
 					$totals[$i] = array(0.0, 0);
 				}
 				$max_total = 0.0;
+				if(!isset($result)) {
+					$result = array();
+				}
 				for($i = 0; $i < count($result); $i++) {
 					$total = 0.0;
 					echo "<tr>";

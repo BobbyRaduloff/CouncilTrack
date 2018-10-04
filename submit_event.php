@@ -52,7 +52,7 @@
 				</div>
 			</div>
 			<?php if($same == 0) : ?>
-				<div class="form-group row">
+			<div class="form-group row">
 				<label for="name" class="col-3 col-form-label"> Recepient Name: </label>
 				<div class="col-9">
 					<input type="text" name="r_name" class="form-control" placeholder="Name">
@@ -98,7 +98,7 @@
 					$stmt->bind_result($name, $price);
 					$stmt->fetch();
 					echo "<div class=\"form-group row\">";
-					echo "<label for=\"item${i}\" class=\"col-4 col-form-label\"> ${name} </label>";
+					echo "<label for=\"item${i}\" class=\"col-4 col-form-label\"> ${name}: </label>";
 					echo "<div class=\"col-3\">";
 					echo "<input type=\"number\" id=\"item${i}\" name=\"item${i}\" class=\"form-control\" placeholder=\"0\" step=\"1\" min=\"0\" onchange=\"calculatePrice('item${i}', ${price})\" onload=\"calculatePrice('item${i}', ${price})\">";
 					echo "</div>";
@@ -112,7 +112,12 @@
 					$stmt->close();
 				}
 			?>
-
+			<div class="form-group row">
+				<label for="total" class="col-4 col-form-label"> Total: </label>
+				<div class="col-8">
+					<p id="total" name="total" class="form-control"> 0 </p>
+				</div>
+			</div>
 			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit"> Next </button>
 			<input id="i" type="hidden" name="i" value="<?php echo count($item_array) ?>">
 			<input id="same" type="hidden" name="same" value="<?php echo $GLOBALS["same"] ?>">
