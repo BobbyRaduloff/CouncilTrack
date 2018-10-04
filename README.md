@@ -8,7 +8,7 @@ This software was developed by:
 * Boris Radulov
 	- ACS2020
 	- b.radulov20@acsbg.org
-* Ognyan Trajanov Jr.
+* Ognian Trajanov Jr.
 	- ACS2022
 	- o.trajanov22@acsbg.org
 
