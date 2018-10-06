@@ -9,3 +9,7 @@ function search() {
 		}
 	}
 }
+
+document.getElementById('query').addEventListener('keydown', function(k){
+    if(k.keyCode == 13) return false;
+});
