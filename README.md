@@ -1,7 +1,7 @@
 # Council Track
 
 ## Description
-Council Track is a online web-app writen to be used by schools where students facilitate small item purchases like tickets for events or hall-o-ween candy. To run it needs a LAMP stack with PHP 7 and mysql. It uses Bootstrap for the minimalistic design.
+Council Track is a online web-app written to be used by schools where students facilitate small item purchases like tickets for events or hall-o-ween candy. To run it needs a LAMP stack with PHP 7 and mysql. It uses Bootstrap for the minimalistic design.
 
 ## Attribution
 This software was developed by:
