@@ -35,7 +35,7 @@
 			<div class="form-group row">
 				<div class="col">
 					<div class="form-check">
-						<input type="checkbox" name="same" class="form-check-input" value="Yes">
+						<input type="checkbox" name="same" class="form-check-input" id="same" value="Yes">
 						<label class="form-check-label" for="same"> The buyer is also the recepient </label>
 					</div>
 				</div>

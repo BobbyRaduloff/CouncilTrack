@@ -36,7 +36,6 @@
 					$stmt->bind_param("sd", $_POST["item".(string)$i], floatval($_POST["price".(string)$i]));
 					$stmt->execute();
 					$id = $conn->insert_id;
-					$stmt->close();
 					$items .=  (string)$id;
 					if($i < $count - 1) {
 						$items .= ",";

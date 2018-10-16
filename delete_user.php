@@ -15,7 +15,14 @@
 			include "utils.php";
 
 			check_level(1);
+			$conn = db_connect();
+			$GLOBALS["has"] = check_empty($conn, "users") - 1;
+			if($GLOBALS["has"] < 2) {
+				echo "<p class=\"h3 text-center\"> There are no users. </p>";
+			}
+			$conn->close();
 		?>
+		<?php if($GLOBALS["has"] > 1) : ?>
 		<form id="delete-user-form" class="form-ct" action="delete_user_db.php" method="post" accept-charset="utf-8">
 			<p class="h2 text-center form-heading"> Delete user </p>
 			<label for="id"> Username: </label>
@@ -42,6 +49,7 @@
 			</select>
 			<button class="btn btn-lg btn-danger btn-block btn-final" type="submit"> Next </button>
 		</form>
+		<?php endif; ?>
 		<?php include "back.html"; ?>
 		<?php include "footer.html"; ?>
 	</div>	

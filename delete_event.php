@@ -15,7 +15,14 @@
 			include "utils.php";
 
 			check_level(2);
+			$conn = db_connect();
+			$GLOBALS["has"] = check_empty($conn, "tables");
+			if(!$GLOBALS["has"]) {
+				echo "<p class=\"h3 text-center\"> There are no events. </p>";
+			}
+			$conn->close();
 		?>
+		<?php if($GLOBALS["has"]) : ?>
 		<form id="delete-event-form" class="form-ct" action="delete_event_db.php" method="post" accept-charset="utf-8">
 			<p class="h2 text-center form-heading"> Delete Event </p>
 			<label for="id"> Event: </label>
@@ -40,6 +47,7 @@
 			</select>
 			<button class="btn btn-lg btn-danger btn-block btn-final" type="submit"> Next </button>
 		</form>
+		<?php endif; ?>
 		<?php include "back.html"; ?>
 		<?php include "footer.html"; ?>
 	</div>	
