@@ -14,8 +14,13 @@
 			if(!empty($_SESSION["level"])) {
 				header("Location: main.php");
 			}
-			include "header.html";
 		?>
+		<div class="row">
+			<div class="col mx-auto">
+				<p class="h1 text-center pt-4" style="cursor: pointer;"> Council Track </p>
+				<hr style="height:5px; border:none; color:#333; background-color:#333;">
+			</div>
+		</div>
 		<form class="form-ct" action="login.php" method="post" accept-charset="utf-8">
 			<p class="h2 text-center form-heading"> Please sign in </p>
 			<label for="username" class="sr-only"> Username </label>

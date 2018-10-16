@@ -16,7 +16,14 @@
 			include "utils.php";
 
 			check_level(1);
+			$conn = db_connect();
+			$GLOBALS["has"] = check_empty($conn, "tables");
+			if(!$GLOBALS["has"]) {
+				echo "<p class=\"h3 text-center\"> There are no events. </p>";
+			}
+			$conn->close();
 		?>
+		<?php if($GLOBALS["has"]) : ?>
 		<form id="submit-event-form" class="form-ct" action="submit_event.php" method="post" accept-charset="utf-8">
 			<p class="h2 text-center form-heading"> Submit Event </p>
 			<label for="id"> Event: </label>
@@ -41,6 +48,7 @@
 			</select>
 			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit"> Next </button>
 		</form>
+		<?php endif; ?>
 		<?php include "back.html"; ?>
 		<?php include "footer.html"; ?>
 	</div>	

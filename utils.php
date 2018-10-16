@@ -12,6 +12,19 @@
 		return $conn;
 	}
 
+	function check_empty($conn, $table) {
+		$stmt = $conn->prepare("SELECT * FROM " . $table . " WHERE 1");
+		if(!$stmt) {
+			echo("<p class=\"h3 text-center\"> Something went very wrong. </p>");
+		}
+		$stmt->execute();
+		$stmt->store_result();
+		$ret = $stmt->num_rows();
+		$stmt->free_result();
+		$stmt->close();
+		return $ret;
+	}
+
 	function try_again($where) {
 		die("<button type=\"submit\" class=\"btn btn-lg btn-primary btn-block\" onclick=\"window.location='$where';\"> Try Again </button>");
 	}
