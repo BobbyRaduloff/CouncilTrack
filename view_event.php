@@ -23,12 +23,12 @@
 			$stmt->fetch();
 			echo "<div class=\"row\"> <div class=\"col mx-auto\"> <p class=\"h3 text-center pt-4\"> ${event_name} </p> </div> </div>"
 		?>
-		<form class="form-ct" accept-charset="utf-8">
+		<div class="form-ct">
 			<label for="query" class="col-sm-2 col-form-label"> Search: </label>
 			<div class="col-sm-10">
-				<input type="text" name="query" id="query" class="form-control" onchange="search();"">
+				<input type="text" name="query" id="query" class="form-control" onchange="search();">
 			</div>
-		</form>
+		</div>
 		<div class="table-responsive">
 			<?php
 			session_start();

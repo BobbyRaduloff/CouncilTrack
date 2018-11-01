@@ -55,7 +55,7 @@
 
 				$params = array();
 				$tablename = "table" . (string)$id;
-				$query = "CREATE TABLE ${tablename} (";
+				$query = "CREATE TABLE ${tablename} (who int, ";
 				for($i = 0; $i < $count; $i++) {
 					if(empty($_POST["item".(string)$i])) {
 						echo "<p class=\"h3 text-center\"> Fill all the fields. </p>";

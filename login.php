@@ -27,17 +27,18 @@
 				try_again("index.php");
 			} else {
 				$conn = db_connect();
-				$stmt = $conn->prepare("SELECT password, level FROM users where username = ?");
+				$stmt = $conn->prepare("SELECT password, level, id FROM users where username = ?");
 				if(!$stmt) {
 					goto wrong;
 				}
 				$stmt->bind_param("s", $_POST["username"]);
 				$stmt->execute();
-				$stmt->bind_result($real_pass, $level);
+				$stmt->bind_result($real_pass, $level, $id);
 				$stmt->fetch();
 
 				if(password_verify($_POST["password"], $real_pass)){
 					$_SESSION["username"] = $_POST["username"];
+					$_SESSION["id"] = $id;
 					$_SESSION["level"] = $level;
 					header("Location: main.php");
 				} else {

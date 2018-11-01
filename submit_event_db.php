@@ -59,7 +59,7 @@
 			} else {
 				$count = intval($_POST["i"]);
 				$conn = db_connect();
-				$stmt_string = "INSERT INTO table".$_POST["id"] . "(grade, section, name, ";
+				$stmt_string = "INSERT INTO table".$_POST["id"] . "(who, grade, section, name, ";
 				if(intval($_POST["same"]) == 0) {
 					$stmt_string .= "r_grade, r_section, recepient, ";
 				}
@@ -69,7 +69,7 @@
 						$stmt_string .= " ,";
 					}
 				}
-				$stmt_string .= ") VALUES (?, ?, ?, ";
+				$stmt_string .= ") VALUES (?, ?, ?, ?, ";
 				if(intval($_POST["same"]) == 0) {
 					$stmt_string .= "?, ?, ?, ";
 				}
@@ -85,7 +85,7 @@
 				if(!$stmt) {
 					goto wrong;
 				}
-				$param_array = array(((intval($_POST["same"]) == 0) ? "iisiis" : "iis") . str_repeat("i", $count), $_POST["grade"], $_POST["section"], $_POST["name"]);
+				$param_array = array(((intval($_POST["same"]) == 0) ? "iiisiis" : "iiis") . str_repeat("i", $count), $_SESSION["id"], $_POST["grade"], $_POST["section"], $_POST["name"]);
 				if(intval($_POST["same"]) == 0) {
 					array_push($param_array, $_POST["r_grade"], $_POST["r_section"], $_POST["r_name"]);
 				}
@@ -95,6 +95,38 @@
 				call_user_func_array(array($stmt, "bind_param"), $param_array);
 				$stmt->execute();
 				$stmt->close();
+				
+				$names = explode(" ", strtolower($_POST["name"]));
+				$semester = (intval(date("m")) < 9) ? 1 : 0;
+				$year = intval(date("y")) + 5 - (intval($_POST["grade"]) - 8 + $semester);
+				$to = ($names[0])[0] . "." . $names[1] . $year . "@acsbg.org";
+				$subject = "CouncilTrack - Email Receipt";
+				$txt = "Hello, ${_POST["name"]}!\nThis is an email receipt from the student council, notifying you of your purchases. You bought:\n";
+				$stmt = $conn->prepare("SELECT items from tables where id = ?");
+				$stmt->bind_param("i", $_POST["id"]);
+				$stmt->execute();
+				$stmt->bind_result($item_names);
+				$stmt->fetch();
+				$item_array = explode($item_names, ",");
+				$items = array();
+				$stmt->close();
+				for($i = 0; $i < $_POST["i"]; $i++) {
+					$stmt = $conn->prepare("SELECT name, price FROM items where id = ?");
+					$stmt->bind_param("i", $item_array[$i]);
+					$stmt->execute();
+					$stmt->bind_result($iname, $iprice);
+					$stmt->fetch();
+					$items[$i] = array($iname, $iprice);
+					$stmt->close();
+				}
+				for($i = 0; $i < $_POST["i"]; $i++) {
+					$txt .= $_POST["item".$i] . " x " . ($items[$i])[0] . " (" . ($items[$i])[1] . ") = " . ($_POST["item".$i] * ($items[$i])[1]) . "lv.\n";
+				}
+				$txt .= "\nIf there's a problem with your order, show this receipt to a member of the student council.";
+				
+
+				$header = "From: counciltrackacs@gmail.com";
+				mail($to, $subject, $txt, $header);
 				$conn->close();
 				header("Location: main.php");
 				wrong:
