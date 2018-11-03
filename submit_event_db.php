@@ -15,7 +15,7 @@
 
 			session_start();
 
-			check_level(2);
+			check_level(3);
 
 			if(empty($_POST["name"])) {
 				echo "<p class=\"h3 text-center\"> No name entered. </p>";

@@ -30,7 +30,7 @@
 	}
 
 	function check_level($level) {
-		if(empty($_SESSION['level']) || $_SESSION['level'] > $level) {
+		if(!isset($_SESSION['level']) || $_SESSION['level'] > $level) {
 			echo "<p class=\"h3 text-center\"> You don't have the correct premission level or you are not logged in. </p>";
 				try_again("index.php");
 		}

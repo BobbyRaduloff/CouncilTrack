@@ -15,7 +15,7 @@
 			include "utils.php";
 
 			session_start();
-			check_level(1);
+			check_level(3);
 			if(empty($_POST["id"])) {
 				echo "<p class=\"h3 text-center\"> Please, pick an event! </p>";
 				try_again("submit.php");

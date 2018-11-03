@@ -32,7 +32,7 @@
 		<div class="table-responsive">
 			<?php
 			session_start();
-			check_level(1);
+			check_level(3);
 
 			function wrong() {
 				echo "<p class=\"h3 text-center\"> Something went wrong. </p>";

@@ -15,7 +15,7 @@
 			include "header.html";
 			include "utils.php";
 
-			check_level(1);
+			check_level(3);
 			$conn = db_connect();
 			$GLOBALS["has"] = check_empty($conn, "tables");
 			if(!$GLOBALS["has"]) {
