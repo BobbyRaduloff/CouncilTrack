@@ -59,7 +59,7 @@
 			} else {
 				$count = intval($_POST["i"]);
 				$conn = db_connect();
-				$stmt_string = "INSERT INTO table".$_POST["id"] . "(who, grade, section, name, ";
+				$stmt_string = "INSERT INTO table".$_POST["id"] . "(delivered, who, grade, section, name, ";
 				if(intval($_POST["same"]) == 0) {
 					$stmt_string .= "r_grade, r_section, recepient, ";
 				}
@@ -69,7 +69,7 @@
 						$stmt_string .= " ,";
 					}
 				}
-				$stmt_string .= ") VALUES (?, ?, ?, ?, ";
+				$stmt_string .= ") VALUES (?, ?, ?, ?, ?, ";
 				if(intval($_POST["same"]) == 0) {
 					$stmt_string .= "?, ?, ?, ";
 				}
@@ -80,19 +80,21 @@
 					}
 				}
 				$stmt_string .= ")";
-				echo $stmt_string;
 				$stmt = $conn->prepare($stmt_string);
 				if(!$stmt) {
 					goto wrong;
 				}
-				$param_array = array(((intval($_POST["same"]) == 0) ? "iiisiis" : "iiis") . str_repeat("i", $count), $_SESSION["id"], $_POST["grade"], $_POST["section"], $_POST["name"]);
+				echo $_POST["id"];
+				echo $stmt_string;
+				$param_array = array(((intval($_POST["same"]) == 0) ? "iiiisiis" : "iiiis") . str_repeat("i", $count), 0, $_SESSION["id"], $_POST["grade"], $_POST["section"], $_POST["name"]);
 				if(intval($_POST["same"]) == 0) {
 					array_push($param_array, $_POST["r_grade"], $_POST["r_section"], $_POST["r_name"]);
 				}
 				for($i = 0; $i < $count; $i++) {
 					array_push($param_array, $_POST["item".(string)$i]);
 				}
-				call_user_func_array(array($stmt, "bind_param"), $param_array);
+				var_dump($param_array);
+				$stmt->bind_param(...$param_array);
 				$stmt->execute();
 				$stmt->close();
 				
@@ -103,11 +105,11 @@
 				$subject = "CouncilTrack - Email Receipt";
 				$txt = "Hello, ${_POST["name"]}!\nThis is an email receipt from the student council, notifying you of your purchases. You bought:\n";
 				$stmt = $conn->prepare("SELECT items from tables where id = ?");
-				$stmt->bind_param("i", $_POST["id"]);
+				$stmt->bind_param("i", intval($_POST["id"]));
 				$stmt->execute();
 				$stmt->bind_result($item_names);
 				$stmt->fetch();
-				$item_array = explode($item_names, ",");
+				$item_array = explode(",", $item_names);
 				$items = array();
 				$stmt->close();
 				for($i = 0; $i < $_POST["i"]; $i++) {
