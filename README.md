@@ -14,5 +14,19 @@ This software was developed by:
 
 The idea was initally put forward by Martin Kirilov (ACS2020).
 
+## Setup
+1. Download this repo in a folder in your web server directory.
+2. Paste the following into your sql terminal:
+```
+CREATE DATABASE counciltrack CHARACTER SET UTF8 COLLATE utf8_bin;
+CREATE TABLE counciltrack.users (id int NOT NULL AUTO_INCREMENT UNIQUE, username varchar(512) NOT NULL, password varchar(512) NOT NULL, level int NOT NULL);
+CREATE TABLE counciltrack.tables (id int NOT NULL AUTO_INCREMENT UNIQUE, name varchar(512) NOT NULL, i int NOT NULL, same tinyint(1), items mediumtext);
+CREATE TABLE counciltrack.items (id int NOT NULL AUTO_INCREMENT UNIQUE, name varchar(512), price double);
+```
+3. Open https://bcrypt-generator.com/ and hash the admin password.
+4. `INSERT INTO counciltrack.users (username, password, level) VALUES ("admin_name", "BCRYPT HASH", 0);`
+5. ???
+6. Profit.
+
 ## Licensing
 This piece of software is licensed under the MIT License. More information in `LICENSE`.
