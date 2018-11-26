@@ -22,7 +22,7 @@
 			}
 			$conn->close();
 		?>
-		<?php if($GLOBALS["has"] > 1) : ?>
+		<?php if($GLOBALS["has"] >= 1) : ?>
 		<form id="delete-user-form" class="form-ct" action="delete_user_db.php" method="post" accept-charset="utf-8">
 			<p class="h2 text-center form-heading"> Delete user </p>
 			<label for="id"> Username: </label>

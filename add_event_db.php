@@ -65,11 +65,11 @@
 					$query .= "item${i} BOOLEAN,";
 				}
 				if($same) {
-					$query .= "grade int, section int, name varchar(512))";
+					$query .= "grade int, section int, name varchar(512), email varchar(512)";
 				} else {
-					$query .= "grade int, section int, name varchar(512), recepient varchar(512), r_grade int, r_section int)";
+					$query .= "grade int, section int, name varchar(512), email varchar(512), recepient varchar(512), r_grade int, r_section int, r_email varchar(512)";
 				}
-
+				$query .= ", ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)";
 				$stmt = $conn->prepare($query);
 				if(!$stmt) {
 					goto wrong;

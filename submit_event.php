@@ -51,7 +51,18 @@
 					<input type="number" name="section" class="form-control" placeholder="1" min="1" max="10" step="1">
 				</div>
 			</div>
+			<div class="form-group row">
+				<label for="email" class="col-3 col-form-label"> Email (optional): </label>
+				<div class="col-9">
+					<input type="email" name="email" class="form-control" placeholder="E-mail">
+				</div>
+			</div>
 			<?php if($same == 0) : ?>
+			<div class="form-group row">
+				<div class="col-12">
+					<hr>
+				</div>
+			</div>
 			<div class="form-group row">
 				<label for="name" class="col-3 col-form-label"> Recepient Name: </label>
 				<div class="col-9">
@@ -70,7 +81,19 @@
 					<input type="number" name="r_section" class="form-control" placeholder="1" min="1" max="10" step="1">
 				</div>
 			</div>
+			<div class="form-group row">
+				<label for="r_email" class="col-4 col-form-label"> Recepient Email (optional): </label>
+
+				<div class="col-8">
+					<input type="email" name="r_email" class="form-control" placeholder="E-mail">
+				</div>
+			</div>
 			<?php endif; ?>
+			<div class="form-group row">
+				<div class="col-12">
+					<hr>
+				</div>
+			</div>
 			<?php
 				function wrong() {
 					echo "<p class=\"h3 text-center\"> Something went wrong. </p>";

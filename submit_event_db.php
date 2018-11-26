@@ -59,9 +59,9 @@
 			} else {
 				$count = intval($_POST["i"]);
 				$conn = db_connect();
-				$stmt_string = "INSERT INTO table".$_POST["id"] . "(delivered, who, grade, section, name, ";
+				$stmt_string = "INSERT INTO table".$_POST["id"] . "(delivered, who, grade, section, name, email";
 				if(intval($_POST["same"]) == 0) {
-					$stmt_string .= "r_grade, r_section, recepient, ";
+					$stmt_string .= ", r_grade, r_section, recepient, r_email, ";
 				}
 				for($i = 0; $i < $count; $i++) {
 					$stmt_string .= "item".(string)$i;
@@ -69,39 +69,48 @@
 						$stmt_string .= " ,";
 					}
 				}
-				$stmt_string .= ") VALUES (?, ?, ?, ?, ?, ";
+				$stmt_string .= ") VALUES (?, ?, ?, ?, ?, ?, ";
 				if(intval($_POST["same"]) == 0) {
-					$stmt_string .= "?, ?, ?, ";
+					$stmt_string .= "?, ?, ?, ?, ";
 				}
 				for($i = 0; $i < $count; $i++) {
 					$stmt_string .= "?";
 					if($i < $count - 1) {
-						$stmt_string .= " ,";
+						$stmt_string .= ", ";
 					}
 				}
 				$stmt_string .= ")";
 				$stmt = $conn->prepare($stmt_string);
+				echo $stmt_string;
 				if(!$stmt) {
 					goto wrong;
 				}
 				echo $_POST["id"];
 				echo $stmt_string;
-				$param_array = array(((intval($_POST["same"]) == 0) ? "iiiisiis" : "iiiis") . str_repeat("i", $count), 0, $_SESSION["id"], $_POST["grade"], $_POST["section"], $_POST["name"]);
+				$param_array = array(((intval($_POST["same"]) == 0) ? "iiiissiiss" : "iiiiss") . str_repeat("i", $count), 0, $_SESSION["id"], $_POST["grade"], $_POST["section"], $_POST["name"]);
+				$to;
+				if(empty($_POST["email"])) {
+					$to = email_gen($_POST["name"], intval($_POST["grade"]));
+					array_push($param_array, $to);
+				} else {
+					$to = $_POST["email"];
+					array_push($param_array, $to);
+				}
 				if(intval($_POST["same"]) == 0) {
 					array_push($param_array, $_POST["r_grade"], $_POST["r_section"], $_POST["r_name"]);
+					if(empty($_POST["r_email"])) {
+						array_push($param_array, email_gen($_POST["r_name"], intval($_POST["r_grade"])));
+					} else {
+						array_push($param_array, $_POST["r_email"]);
+					}
 				}
 				for($i = 0; $i < $count; $i++) {
 					array_push($param_array, $_POST["item".(string)$i]);
 				}
-				var_dump($param_array);
 				$stmt->bind_param(...$param_array);
 				$stmt->execute();
 				$stmt->close();
 				
-				$names = explode(" ", strtolower($_POST["name"]));
-				$semester = (intval(date("m")) < 9) ? 1 : 0;
-				$year = intval(date("y")) + 5 - (intval($_POST["grade"]) - 8 + $semester);
-				$to = ($names[0])[0] . "." . $names[1] . $year . "@acsbg.org";
 				$subject = "CouncilTrack - Email Receipt";
 				$txt = "Hello, ${_POST["name"]}!\nThis is an email receipt from the student council, notifying you of your purchases. You bought:\n";
 				$stmt = $conn->prepare("SELECT items from tables where id = ?");
@@ -126,8 +135,8 @@
 				}
 				$txt .= "\nIf there's a problem with your order, show this receipt to a member of the student council.";
 				
-
-				$header = "From: counciltrackacs@gmail.com";
+				
+				$header = "XXXXXXXXXXXXXXXXXXXXXXXXX";
 				mail($to, $subject, $txt, $header);
 				$conn->close();
 				header("Location: main.php");

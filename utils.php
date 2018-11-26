@@ -36,4 +36,12 @@
 		}
 
 	}
+
+	function email_gen($name, $grade) {	
+		$names = explode(" ", strtolower($name));
+		$semester = (intval(date("m")) < 9) ? 1 : 0;
+		$year = intval(date("y")) + 5 - (intval($grade) - 8 + $semester);
+		$to = ($names[0])[0] . "." . $names[1] . $year . "@acsbg.org";
+		return $to;
+	}
 ?>
