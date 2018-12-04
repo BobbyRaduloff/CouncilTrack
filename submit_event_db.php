@@ -59,7 +59,7 @@
 			} else {
 				$count = intval($_POST["i"]);
 				$conn = db_connect();
-				$stmt_string = "INSERT INTO table".$_POST["id"] . "(delivered, who, grade, section, name, email";
+				$stmt_string = "INSERT INTO table".$_POST["id"] . "(anonymous, delivered, who, grade, section, name, email";
 				if(intval($_POST["same"]) == 0) {
 					$stmt_string .= ", r_grade, r_section, recepient, r_email, ";
 				}
@@ -69,7 +69,7 @@
 						$stmt_string .= " ,";
 					}
 				}
-				$stmt_string .= ") VALUES (?, ?, ?, ?, ?, ?, ";
+				$stmt_string .= ") VALUES (?, ?, ?, ?, ?, ?, ?, ";
 				if(intval($_POST["same"]) == 0) {
 					$stmt_string .= "?, ?, ?, ?, ";
 				}
@@ -87,7 +87,7 @@
 				}
 				echo $_POST["id"];
 				echo $stmt_string;
-				$param_array = array(((intval($_POST["same"]) == 0) ? "iiiissiiss" : "iiiiss") . str_repeat("i", $count), 0, $_SESSION["id"], $_POST["grade"], $_POST["section"], $_POST["name"]);
+				$param_array = array(((intval($_POST["same"]) == 0) ? "iiiiissiiss" : "iiiiiss") . str_repeat("i", $count), intval(isset($_POST["anonymous"])), 0, $_SESSION["id"], $_POST["grade"], $_POST["section"], $_POST["name"]);
 				$to;
 				if(empty($_POST["email"])) {
 					$to = email_gen($_POST["name"], intval($_POST["grade"]));

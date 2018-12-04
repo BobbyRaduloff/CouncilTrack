@@ -54,7 +54,7 @@
 
 				$params = array();
 				$tablename = "table" . (string)$id;
-				$query = "CREATE TABLE ${tablename} (id int NOT NULL AUTO_INCREMENT UNIQUE, delivered int, who int, ";
+				$query = "CREATE TABLE ${tablename} (id int NOT NULL AUTO_INCREMENT UNIQUE, anonymous int(1), delivered int, who int, ";
 				for($i = 0; $i < $count; $i++) {
 					if(empty($_POST["item".(string)$i])) {
 						echo "<p class=\"h3 text-center\"> Fill all the fields. </p>";

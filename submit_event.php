@@ -57,6 +57,14 @@
 					<input type="email" name="email" class="form-control" placeholder="E-mail">
 				</div>
 			</div>
+			<div class="form-group row">
+				<div class="col">
+					<div class="form-check">
+						<input type="checkbox" name="anonymous" class="form-check-input" id="anonymous" value="Yes">
+						<label class="form-check-label" for="anonymous"> Anonymous </label>
+					</div>
+				</div>
+			</div>
 			<?php if($same == 0) : ?>
 			<div class="form-group row">
 				<div class="col-12">
@@ -105,8 +113,8 @@
 				if(!$stmt) {
 					wrong();
 				}
-				$stmt->bind_param("i", intval($_POST["id"]));
-				$stmt->execute();
+				$stmt->bind_param("i", intval($_POST["id"]))
+;				$stmt->execute();
 				$stmt->bind_result($items);
 				$stmt->fetch();
 				$item_array = explode(",", $items);
