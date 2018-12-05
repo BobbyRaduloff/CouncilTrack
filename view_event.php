@@ -90,7 +90,7 @@ EOF;
 				}
 				if(isset($_POST["query"])) {
 					if(!intval($same)) {
-						$stmt_string .= " FROM table${_POST["id"]} WHERE name LIKE LOWER(?) OR recepient LIKE LOWER(?) OR grade LIKE LOWER(?) OR r_grade LIKE LOWER(?) OR CONCAT(CONCAT(grade, \"/\"), section) LIKE LOWER(?) OR CONCAT(CONCAT(r_grade, \"/\"),  r_section) LIKE LOWER(?)";
+						$stmt_string .= " FROM table${_POST["id"]} WHERE name LIKE LOWER(?) OR recepient LIKE LOWER(?) OR r_grade LIKE LOWER(?) OR CONCAT(CONCAT(r_grade, \"/\"),  r_section) LIKE LOWER(?)";
 					} else {
 						$stmt_string .= " FROM table${_POST["id"]} WHERE name LIKE LOWER(?) OR grade LIKE LOWER(?) OR CONCAT(CONCAT(grade, \"/\"), section) LIKE LOWER(?)";
 					}
@@ -106,7 +106,7 @@ EOF;
 				if(isset($_POST["query"])) {
 					$query = "%" . $_POST["query"] . "%";
 					if(!intval($same)) {
-						$stmt->bind_param("ssssss", $query, $query, $query, $query, $query, $query);
+						$stmt->bind_param("ssss", $query, $query, $query, $query);
 					} else {
 						$stmt->bind_param("sss", $query, $query, $query);
 					}
