@@ -59,9 +59,9 @@
 			} else {
 				$count = intval($_POST["i"]);
 				$conn = db_connect();
-				$stmt_string = "INSERT INTO table".$_POST["id"] . "(anonymous, delivered, who, grade, section, name, email";
+				$stmt_string = "INSERT INTO table".$_POST["id"] . "(delivered, who, grade, section, name, email, ";
 				if(intval($_POST["same"]) == 0) {
-					$stmt_string .= ", r_grade, r_section, recepient, r_email, ";
+					$stmt_string .= "anonymous, r_grade, r_section, recepient, r_email, message, ";
 				}
 				for($i = 0; $i < $count; $i++) {
 					$stmt_string .= "item".(string)$i;
@@ -69,9 +69,9 @@
 						$stmt_string .= " ,";
 					}
 				}
-				$stmt_string .= ") VALUES (?, ?, ?, ?, ?, ?, ?, ";
+				$stmt_string .= ") VALUES (?, ?, ?, ?, ?, ?, ";
 				if(intval($_POST["same"]) == 0) {
-					$stmt_string .= "?, ?, ?, ?, ";
+					$stmt_string .= "?, ?, ?, ?, ?, ?, ";
 				}
 				for($i = 0; $i < $count; $i++) {
 					$stmt_string .= "?";
@@ -87,7 +87,7 @@
 				}
 				echo $_POST["id"];
 				echo $stmt_string;
-				$param_array = array(((intval($_POST["same"]) == 0) ? "iiiiissiiss" : "iiiiiss") . str_repeat("i", $count), intval(isset($_POST["anonymous"])), 0, $_SESSION["id"], $_POST["grade"], $_POST["section"], $_POST["name"]);
+				$param_array = array(((intval($_POST["same"]) == 0) ? "iiiissiiisss" : "iiiiss") . str_repeat("i", $count), 0, $_SESSION["id"], $_POST["grade"], $_POST["section"], $_POST["name"]);
 				$to;
 				if(empty($_POST["email"])) {
 					$to = email_gen($_POST["name"], intval($_POST["grade"]));
@@ -97,12 +97,14 @@
 					array_push($param_array, $to);
 				}
 				if(intval($_POST["same"]) == 0) {
+					array_push($param_array, intval(isset($_POST["anonymous"])));
 					array_push($param_array, $_POST["r_grade"], $_POST["r_section"], $_POST["r_name"]);
 					if(empty($_POST["r_email"])) {
 						array_push($param_array, email_gen($_POST["r_name"], intval($_POST["r_grade"])));
 					} else {
 						array_push($param_array, $_POST["r_email"]);
 					}
+					array_push($param_array, $_POST["message"]);
 				}
 				for($i = 0; $i < $count; $i++) {
 					array_push($param_array, $_POST["item".(string)$i]);

@@ -54,7 +54,7 @@
 
 				$params = array();
 				$tablename = "table" . (string)$id;
-				$query = "CREATE TABLE ${tablename} (id int NOT NULL AUTO_INCREMENT UNIQUE, anonymous int(1), delivered int, who int, ";
+				$query = "CREATE TABLE ${tablename} (id int NOT NULL AUTO_INCREMENT UNIQUE, delivered int, who int, ";
 				for($i = 0; $i < $count; $i++) {
 					if(empty($_POST["item".(string)$i])) {
 						echo "<p class=\"h3 text-center\"> Fill all the fields. </p>";
@@ -67,7 +67,7 @@
 				if($same) {
 					$query .= "grade int, section int, name varchar(512), email varchar(512)";
 				} else {
-					$query .= "grade int, section int, name varchar(512), email varchar(512), recepient varchar(512), r_grade int, r_section int, r_email varchar(512)";
+					$query .= "grade int, section int, name varchar(512), email varchar(512), recepient varchar(512), r_grade int, r_section int, r_email varchar(512), anonymous int(1), message varchar(2048)";
 				}
 				$query .= ", ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)";
 				$stmt = $conn->prepare($query);

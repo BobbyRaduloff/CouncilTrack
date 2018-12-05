@@ -57,6 +57,7 @@
 					<input type="email" name="email" class="form-control" placeholder="E-mail">
 				</div>
 			</div>
+			<?php if($same == 0) : ?>
 			<div class="form-group row">
 				<div class="col">
 					<div class="form-check">
@@ -65,7 +66,6 @@
 					</div>
 				</div>
 			</div>
-			<?php if($same == 0) : ?>
 			<div class="form-group row">
 				<div class="col-12">
 					<hr>
@@ -149,6 +149,18 @@
 					<p id="total" name="total" class="form-control"> 0 </p>
 				</div>
 			</div>
+			<div class="form-group row">
+				<div class="col-12">
+					<hr>
+				</div>
+			</div>
+			<?php if($same == 0) : ?>
+			<div class="form-group row">
+				<div class="col mx-auto">
+					<textarea rows="6" name="message" class="form-control" placeholder="Message to recepient (optional):"></textarea>
+				</div>
+			</div>
+			<?php endif; ?>
 			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit"> Next </button>
 			<input id="i" type="hidden" name="i" value="<?php echo count($item_array) ?>">
 			<input id="same" type="hidden" name="same" value="<?php echo $GLOBALS["same"] ?>">
