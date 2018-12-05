@@ -28,7 +28,7 @@
 				<option value="2"> Senior User </option>
 				<option value="1"> Administrator </option>		
 			</select>
-			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit"> Next </button>
+			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit"> Finalize </button>
 		</form>
 		<?php include "back.html"; ?>
 		<?php include "footer.html"; ?>
