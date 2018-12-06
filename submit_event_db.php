@@ -81,12 +81,9 @@
 				}
 				$stmt_string .= ")";
 				$stmt = $conn->prepare($stmt_string);
-				echo $stmt_string;
 				if(!$stmt) {
 					goto wrong;
 				}
-				echo $_POST["id"];
-				echo $stmt_string;
 				$param_array = array(((intval($_POST["same"]) == 0) ? "iiiissiiisss" : "iiiiss") . str_repeat("i", $count), 0, $_SESSION["id"], $_POST["grade"], $_POST["section"], $_POST["name"]);
 				$to;
 				if(empty($_POST["email"])) {
@@ -131,11 +128,16 @@
 					$items[$i] = array($iname, $iprice);
 					$stmt->close();
 				}
+				$total = 0;
 				for($i = 0; $i < $_POST["i"]; $i++) {
 					$txt .= $_POST["item".$i] . " x " . ($items[$i])[0] . " (" . ($items[$i])[1] . ") = " . ($_POST["item".$i] * ($items[$i])[1]) . "lv.\n";
+					$total += intval($_POST["item".$i]) * ($items[$i])[1];
 				}
+				$stmt = $conn->prepare("UPDATE users SET balance = balance + ? WHERE id = ?");
+				$stmt->bind_param("is", $total, $_SESSION["id"]);
+				$stmt->execute();
 				$txt .= "\nIf there's a problem with your order, show this receipt to a member of the student council.";
-				send_mail($to, "CouncilTrack - Email Receipt", $txt);
+				send_email($to, "CouncilTrack - Email Receipt", $txt);
 				
 				$conn->close();
 				header("Location: main.php");
