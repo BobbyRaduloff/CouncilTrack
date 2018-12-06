@@ -1,0 +1,3 @@
+<Files "config.ini">  
+  Require all denied
+</Files>

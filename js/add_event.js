@@ -8,15 +8,15 @@ function add_item() {
 	var what = `
 	<div class="form-group row" id="itemid_${i}">
 		<label for="item${i}" class="col col-form-label sr-only"> Item </label>
-		<div class="col">
+		<div class="col-sm-6">
 			<input type="text" name="item${i}" id="item${i}" class="form-control" placeholder="Item">
 		</div>
 		<label for="price${i}" class="col col-form-label sr-only"> Price </label>
-		<div class="col">
+		<div class="col-sm-5">
 			<input lang="en" type="number" name="price${i}" id="price${i}" class="form-control" min="0" step="0.01">
 		</div>
-		<div class="col">
-			<p> lv. </p>
+		<div class="col-sm-1">
+			<p> .lv </p>
 		</div>
 `;
 	var values = [];

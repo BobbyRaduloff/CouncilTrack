@@ -1,9 +1,10 @@
 <?php
 	function db_connect() {
-		$db_servername = "localhost";
-		$db_username = "root";
-		$db_password = "";
-		$db_name = "counciltrack";
+		$ini = parse_ini_file("config.ini");
+		$db_servername = $ini["location"];
+		$db_username = $ini["user"];
+		$db_password = $ini["pass"];
+		$db_name = $ini["database"];
 		$conn = new mysqli($db_servername, $db_username, $db_password, $db_name);
 		if($conn->connect_error) {
 			die("<p class=\"h3 text-center\"> Connection failed! </p>");
@@ -46,7 +47,6 @@
 	}
 
 	function send_email($email, $subject, $txt) {
-		//TODO: SET UP YOUR EMAIL HERE
 		mail($email, $subject, $txt, "From: XXXXX@XXXXX.com");
 	}
 ?>
