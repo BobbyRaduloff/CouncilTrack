@@ -46,11 +46,17 @@
 					$conn->close();
 				?>
 			</select>
-			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit" value="output" name="what"> Output </button>
-			<?php if($_SESSION["level"] < 3) ?>
-				<button class="btn btn-lg btn-primary btn-block btn-final" value="money" name="what"> Money </button>
-			<? endif; ?>
+			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit"> Output </button>
 		</form>
+		<?php
+			if($_SESSION["level"] < 3) {
+				echo "<form id=\"view-event-form\" class=\"form-ct\" action=\"money.php\" method=\"post\" accept-charset=\"utf-8\">";
+				echo "<hr>";
+				echo "<p class=\"h2 text-center form-heading\" style=\"margin: 20px;\"> View Money </p>";
+				echo "<button class=\"btn btn-lg btn-primary btn-block btn-final\" value=\"money\" name=\"what\"> Money </button>";
+				echo "</form>";
+			}
+		?>
 		<?php endif; ?>
 		<?php include "back.html"; ?>
 		<?php include "footer.html"; ?>

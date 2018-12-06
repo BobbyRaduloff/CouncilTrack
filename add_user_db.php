@@ -26,16 +26,19 @@
 			} elseif(empty($_POST["level"])) {
 				echo "<p class=\"h3 text-center\"> No password entered. </p>";
 				try_again("add_user.php");
+			} elseif(empty($_POST["name"])) {
+				echo "<p class=\"h3 text-center\"> No full name entered. </p>";
+				try_again("add_user.php");
 			} else {
 				$conn = db_connect();
-				$stmt = $conn->prepare("INSERT INTO users (username, password, level) VALUES (?, ?, ?)");
+				$stmt = $conn->prepare("INSERT INTO users (username, name, password, level) VALUES (?, ?, ?, ?)");
 				if(!$stmt) {
 					echo "<p class=\"h3 text-center\"> Something went wrong... <\p>";
 					try_again("add_user.php");
 				}
 				$hashed_password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 				$level = intval($_POST["level"]);
-				$stmt->bind_param("ssi", $_POST["username"], $hashed_password, $level);
+				$stmt->bind_param("sssi", $_POST["username"], $_POST["name"], $hashed_password, $level);
 				$stmt->execute();
 
 				$stmt->close();

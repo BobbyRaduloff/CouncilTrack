@@ -19,7 +19,7 @@ The idea was initally put forward by Martin Kirilov (ACS2020).
 2. Paste the following into your sql terminal:
 ```
 CREATE DATABASE counciltrack CHARACTER SET UTF8 COLLATE utf8_bin;
-CREATE TABLE counciltrack.users (id int NOT NULL AUTO_INCREMENT UNIQUE, username varchar(512) NOT NULL, password varchar(512) NOT NULL, level int NOT NULL, balance int NOT NULL);
+CREATE TABLE counciltrack.users (id int NOT NULL AUTO_INCREMENT UNIQUE, username varchar(512) NOT NULL, name varchar(512) NOT NULL, password varchar(512) NOT NULL, level int NOT NULL, balance int NOT NULL);
 CREATE TABLE counciltrack.tables (id int NOT NULL AUTO_INCREMENT UNIQUE, name varchar(512) NOT NULL, i int NOT NULL, same tinyint(1), items mediumtext);
 CREATE TABLE counciltrack.items (id int NOT NULL AUTO_INCREMENT UNIQUE, name varchar(512), price double);
 ```

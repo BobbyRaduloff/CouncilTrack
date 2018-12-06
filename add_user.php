@@ -18,17 +18,39 @@
 		?>
 		<form id="add-user-form" class="form-ct" action="add_user_db.php" method="post" accept-charset="utf-8">
 			<p class="h2 text-center form-heading"> Add user </p>
-			<label for="username" class="sr-only"> Username </label>
-			<input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
-			<label for="password" class="sr-only"> Password </label>
-			<input type="password" name="password" class="form-control" placeholder="Password" required>
-			<label for="level"> Privilige Level: </label>
-			<select class="selector" name="level" form="add-user-form">
-				<option value="3"> Junior User </option>
-				<option value="2"> Senior User </option>
-				<option value="1"> Administrator </option>		
-			</select>
-			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit"> Finalize </button>
+			<div class="form-group row">
+				<div class="col mx-auto">
+				<label for="username" class="sr-only"> Username </label>
+				<input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col mx-auto">
+					<label for="username" class="sr-only"> Name </label>
+					<input type="text" name="name" class="form-control" placeholder="Full Name" required>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col mx-auto">
+					<label for="password" class="sr-only"> Password </label>
+					<input type="password" name="password" class="form-control" placeholder="Password" required>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col mx-auto">
+					<label for="level"> Privilige Level: </label>
+					<select class="selector" name="level" form="add-user-form">
+						<option value="3"> Junior User </option>
+						<option value="2"> Senior User </option>
+						<option value="1"> Administrator </option>		
+					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col mx-auto">
+					<button class="btn btn-lg btn-primary btn-block btn-final" type="submit"> Finalize </button>
+				</div>
+			</div>
 		</form>
 		<?php include "back.html"; ?>
 		<?php include "footer.html"; ?>

@@ -27,14 +27,8 @@
 			if(empty($_POST["id"])) {
 				echo "<p class=\"h3 text-center\"> No event selected. </p>";
 				try_again("view.php");
-			} elseif(empty($_POST["what"])) {
-				echo "<p class=\"h3 text-center\"> Stop what you are doing and call someone. </p>";
-				try_again("view.php");
 			} else {
 				$conn = db_connect();
-				if($_POST["what"] == "money") {
-					goto money;
-				}
 				$stmt = $conn->prepare("SELECT name, i, same, items FROM tables where id = ?");
 				$stmt->bind_param("i", $_POST["id"]);
 				$stmt->execute();
@@ -175,7 +169,6 @@ EOF;
 				echo "<td> Total: ${max_total}lv. </td> <td> </td> </tr>";
 				echo "</tbody>";
 				$stmt->close();
-				money:
 				$conn->close();
 			}
 			?>			
