@@ -59,6 +59,14 @@
 			</div>
 			<?php if($same == 0) : ?>
 			<div class="form-group row">
+				<div class="col">
+					<div class="form-check">
+						<input type="checkbox" name="anonymous" class="form-check-input" id="anonymous" value="Yes">
+						<label class="form-check-label" for="anonymous"> Anonymous </label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group row">
 				<div class="col-12">
 					<hr>
 				</div>
@@ -105,8 +113,8 @@
 				if(!$stmt) {
 					wrong();
 				}
-				$stmt->bind_param("i", intval($_POST["id"]));
-				$stmt->execute();
+				$stmt->bind_param("i", intval($_POST["id"]))
+;				$stmt->execute();
 				$stmt->bind_result($items);
 				$stmt->fetch();
 				$item_array = explode(",", $items);
@@ -141,6 +149,18 @@
 					<p id="total" name="total" class="form-control"> 0 </p>
 				</div>
 			</div>
+			<div class="form-group row">
+				<div class="col-12">
+					<hr>
+				</div>
+			</div>
+			<?php if($same == 0) : ?>
+			<div class="form-group row">
+				<div class="col mx-auto">
+					<textarea rows="6" name="message" class="form-control" placeholder="Message to recepient (optional):"></textarea>
+				</div>
+			</div>
+			<?php endif; ?>
 			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit"> Next </button>
 			<input id="i" type="hidden" name="i" value="<?php echo count($item_array) ?>">
 			<input id="same" type="hidden" name="same" value="<?php echo $GLOBALS["same"] ?>">

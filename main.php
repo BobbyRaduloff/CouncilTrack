@@ -57,6 +57,23 @@
 				<button class="btn btn-lg btn-warning btn-block" onclick="location.href='logout.php';"> Log Out </button>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col">
+				<p class="h4 text-right">
+					Balance: 
+					<?php
+						$conn = db_connect();
+						$stmt = $conn->prepare("SELECT balance FROM users WHERE id = ?");
+						$stmt->bind_param("i", $_SESSION["id"]);
+						$stmt->execute();
+						$stmt->bind_result($balance);
+						$stmt->fetch();
+						echo $balance;
+						echo " BGN.";
+					?>
+				</p>
+			</div>
+		</div>
 		<?php include "footer.html"; ?>
 	</div>
 </body>

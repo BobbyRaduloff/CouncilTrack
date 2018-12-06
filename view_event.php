@@ -27,8 +27,14 @@
 			if(empty($_POST["id"])) {
 				echo "<p class=\"h3 text-center\"> No event selected. </p>";
 				try_again("view.php");
+			} elseif(empty($_POST["what"])) {
+				echo "<p class=\"h3 text-center\"> Stop what you are doing and call someone. </p>";
+				try_again("view.php");
 			} else {
 				$conn = db_connect();
+				if($_POST["what"] == "money") {
+					goto money;
+				}
 				$stmt = $conn->prepare("SELECT name, i, same, items FROM tables where id = ?");
 				$stmt->bind_param("i", $_POST["id"]);
 				$stmt->execute();
@@ -90,7 +96,7 @@ EOF;
 				}
 				if(isset($_POST["query"])) {
 					if(!intval($same)) {
-						$stmt_string .= " FROM table${_POST["id"]} WHERE name LIKE LOWER(?) OR recepient LIKE LOWER(?) OR grade LIKE LOWER(?) OR r_grade LIKE LOWER(?) OR CONCAT(CONCAT(grade, \"/\"), section) LIKE LOWER(?) OR CONCAT(CONCAT(r_grade, \"/\"),  r_section) LIKE LOWER(?)";
+						$stmt_string .= " FROM table${_POST["id"]} WHERE name LIKE LOWER(?) OR recepient LIKE LOWER(?) OR r_grade LIKE LOWER(?) OR CONCAT(CONCAT(r_grade, \"/\"),  r_section) LIKE LOWER(?)";
 					} else {
 						$stmt_string .= " FROM table${_POST["id"]} WHERE name LIKE LOWER(?) OR grade LIKE LOWER(?) OR CONCAT(CONCAT(grade, \"/\"), section) LIKE LOWER(?)";
 					}
@@ -106,7 +112,7 @@ EOF;
 				if(isset($_POST["query"])) {
 					$query = "%" . $_POST["query"] . "%";
 					if(!intval($same)) {
-						$stmt->bind_param("ssssss", $query, $query, $query, $query, $query, $query);
+						$stmt->bind_param("ssss", $query, $query, $query, $query);
 					} else {
 						$stmt->bind_param("sss", $query, $query, $query);
 					}
@@ -169,6 +175,7 @@ EOF;
 				echo "<td> Total: ${max_total}lv. </td> <td> </td> </tr>";
 				echo "</tbody>";
 				$stmt->close();
+				money:
 				$conn->close();
 			}
 			?>			

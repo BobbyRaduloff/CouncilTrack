@@ -47,7 +47,7 @@
 					$conn->close();
 				?>
 			</select>
-			<button class="btn btn-lg btn-danger btn-block btn-final" type="submit"> Next </button>
+			<button class="btn btn-lg btn-danger btn-block btn-final" type="submit"> Finalize </button>
 		</form>
 		<?php endif; ?>
 		<?php include "back.html"; ?>

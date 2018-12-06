@@ -6,7 +6,7 @@
 	<title> CouncilTrack: View </title>
 	<link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="style/global.css">
-	<script type="text/javascript" src="js/add_event.js"></script>
+	<script type="text/javascript" src="js/view.js"></script>
 </head>
 <body class="mx-auto">
 	<div class="container">
@@ -46,7 +46,10 @@
 					$conn->close();
 				?>
 			</select>
-			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit"> Next </button>
+			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit" value="output" name="what"> Output </button>
+			<?php if($_SESSION["level"] < 3) ?>
+				<button class="btn btn-lg btn-primary btn-block btn-final" value="money" name="what"> Money </button>
+			<? endif; ?>
 		</form>
 		<?php endif; ?>
 		<?php include "back.html"; ?>

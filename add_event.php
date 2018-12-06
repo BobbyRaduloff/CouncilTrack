@@ -40,7 +40,7 @@
 					</div>
 				</div>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit"> Next </button>
+			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit"> Finalize </button>
 			<input id="i" type="hidden" name="i">
 		</form>
 		<?php include "back.html"; ?>
