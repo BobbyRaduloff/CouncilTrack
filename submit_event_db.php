@@ -111,7 +111,6 @@
 				$stmt->execute();
 				$stmt->close();
 				
-				$subject = "CouncilTrack - Email Receipt";
 				$txt = "Hello, ${_POST["name"]}!\nThis is an email receipt from the student council, notifying you of your purchases. You bought:\n";
 				$stmt = $conn->prepare("SELECT items from tables where id = ?");
 				$stmt->bind_param("i", intval($_POST["id"]));
@@ -134,10 +133,8 @@
 					$txt .= $_POST["item".$i] . " x " . ($items[$i])[0] . " (" . ($items[$i])[1] . ") = " . ($_POST["item".$i] * ($items[$i])[1]) . "lv.\n";
 				}
 				$txt .= "\nIf there's a problem with your order, show this receipt to a member of the student council.";
+				send_mail($to, "CouncilTrack - Email Receipt", $txt);
 				
-				
-				$header = "XXXXXXXXXXXXXXXXXXXXXXXXX";
-				mail($to, $subject, $txt, $header);
 				$conn->close();
 				header("Location: main.php");
 				wrong:

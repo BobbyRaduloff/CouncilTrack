@@ -25,8 +25,10 @@ CREATE TABLE counciltrack.items (id int NOT NULL AUTO_INCREMENT UNIQUE, name var
 ```
 3. Open https://bcrypt-generator.com/ and hash the admin password.
 4. `INSERT INTO counciltrack.users (username, password, level) VALUES ("admin_name", "BCRYPT HASH", 0);`
-5. ???
-6. Profit.
+5. Set up your e-mail & sql details in `send_email()` in `config.ini`.
+6. Make sure your config.ini is innacessible in your `.htaccess`.
+7. ???
+8. Profit.
 
 ## Licensing
 This piece of software is licensed under the MIT License. More information in `LICENSE`.

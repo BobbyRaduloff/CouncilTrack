@@ -44,4 +44,9 @@
 		$to = ($names[0])[0] . "." . $names[1] . $year . "@acsbg.org";
 		return $to;
 	}
+
+	function send_email($email, $subject, $txt) {
+		//TODO: SET UP YOUR EMAIL HERE
+		mail($email, $subject, $txt, "From: XXXXX@XXXXX.com");
+	}
 ?>
