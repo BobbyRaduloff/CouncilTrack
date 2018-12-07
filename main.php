@@ -45,13 +45,6 @@
 				</div>
 			</div>
 		<?php endif; ?>
-		<?php if($_SESSION['level'] < 1) : ?>
-			<div class="row">
-				<div class="col mx-auto btn-ui">
-					<button class="btn btn-lg btn-danger btn-block" onclick="location.href='update.php';"> Update </button>
-				</div>
-			</div>
-		<?php endif; ?>
 		<div class="row">
 			<div class="col mx-auto btn-ui">
 				<button class="btn btn-lg btn-warning btn-block" onclick="location.href='logout.php';"> Log Out </button>
@@ -68,7 +61,11 @@
 						$stmt->execute();
 						$stmt->bind_result($balance);
 						$stmt->fetch();
-						echo $balance;
+						if($balance == 69) {
+							echo "Takashi"; // Code Contributed by Nikolay Arnaudov
+						} else {
+							echo $balance;
+						}
 						echo " BGN.";
 					?>
 				</p>

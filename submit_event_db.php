@@ -137,7 +137,7 @@
 				$stmt->bind_param("is", $total, $_SESSION["id"]);
 				$stmt->execute();
 				$txt .= "\nIf there's a problem with your order, show this receipt to a member of the student council.";
-				send_email($to, "CouncilTrack - Email Receipt", $txt);
+				send_email($to, "CouncilTrack - Receipt", $txt);
 				
 				$conn->close();
 				header("Location: main.php");
