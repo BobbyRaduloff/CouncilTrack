@@ -20,20 +20,50 @@
 				$stmt = $conn->prepare("UPDATE table${_POST["event"]} SET delivered = 1 WHERE id = ?");
 				$stmt->bind_param("i", intval($_POST["id"]));
 				$stmt->execute();
-				$stmt = $conn->prepare("SELECT recepient, r_email, anonymous, message FROM table${_POST["event"]} WHERE id = ?");
+				$stmt = $conn->prepare("SELECT recepient, r_email, name, anonymous, message FROM table${_POST["event"]} WHERE id = ?");
 				$stmt->bind_param("i", intval($_POST["id"]));
 				$stmt->execute();
-				$stmt->bind_result($name, $email, $anon, $message);
+				$stmt->bind_result($r_name, $r_email, $name, $anon, $message);
 				$stmt->fetch();
+				$stmt->close();
 				$stmt = $conn->prepare("SELECT items FROM tables WHERE id = ?");
-				$conn->bind_param("i", intval($_POST["event"]));
+				$stmt->bind_param("i", intval($_POST["event"]));
 				$stmt->execute();
-				$stmt->bind_result($items);
+				$stmt->bind_result($item_list);
 				$stmt->fetch();
-				$stmt->item_array
-				$txt = "Dear ${name},\nYou have recieved the following order from student council:\n";
-
-				send_email($email, "Council Track - Delviery", $txt);
+				$stmt->close();
+				$item_array = explode(",", $item_list);
+				$items = array();
+				for($i = 0; $i < count($item_array); $i++) {
+					$stmt = $conn->prepare("SELECT name FROM items WHERE id = ?");
+					$stmt->bind_param("i", $item_array[$i]);
+					$stmt->execute();
+					$stmt->bind_result($iname);
+					$stmt->fetch();
+					$items[$i] = $iname;
+					$stmt->close();
+				}
+				$txt = "Dear ${r_name},\nYou have recieved the following from student council:\n";
+				for($i = 0; $i < count($item_array); $i++) {
+					$stmt = $conn->prepare("SELECT item" . $i . " FROM table" . $_POST["event"] . " WHERE id = ?");
+					$stmt->bind_param("i", $_POST["id"]);
+					$stmt->execute();
+					$stmt->bind_result($sale);
+					$stmt->fetch();
+					if($sale) {
+						$txt .= $iname . " x " . strval($sale) . "\n";
+					}
+					$stmt->close();
+				}
+				$txt .= "Here's the note attached:\n";
+				$txt .= $message;
+				if(intval($anon)) {
+					$txt .= "\nby Anonymous";
+				} else {
+					$txt .= "\mby ${name}";
+				}
+				$conn->close();
+				send_email($r_email, "Council Track - Delviery", $txt);
 			} else {
 				echo "What are you doing???";
 			}

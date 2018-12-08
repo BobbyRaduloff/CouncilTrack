@@ -110,7 +110,7 @@
 				$stmt->execute();
 				$stmt->close();
 				
-				$txt = "Hello, ${_POST["name"]}!\nThis is an email receipt from the student council, notifying you of your purchases. You bought:\n";
+				$txt = "Hello, ${_POST["name"]}!\nThis is an email receipt from the student council, notifying you of your purchases.\nYou bought:\n";
 				$stmt = $conn->prepare("SELECT items from tables where id = ?");
 				$stmt->bind_param("i", intval($_POST["id"]));
 				$stmt->execute();

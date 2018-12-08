@@ -33,7 +33,7 @@
 				$conn = db_connect();
 				$stmt = $conn->prepare("INSERT INTO users (username, name, password, level) VALUES (?, ?, ?, ?)");
 				if(!$stmt) {
-					echo "<p class=\"h3 text-center\"> Something went wrong... <\p>";
+					echo "<p class=\"h3 text-center\"> Something went wrong... </p>";
 					try_again("add_user.php");
 				}
 				$hashed_password = password_hash($_POST["password"], PASSWORD_DEFAULT);

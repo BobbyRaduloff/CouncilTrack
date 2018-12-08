@@ -61,11 +61,7 @@
 						$stmt->execute();
 						$stmt->bind_result($balance);
 						$stmt->fetch();
-						if($balance == 69) {
-							echo "Takashi"; // Code Contributed by Nikolay Arnaudov
-						} else {
-							echo $balance;
-						}
+						echo $balance;
 						echo " BGN.";
 					?>
 				</p>
