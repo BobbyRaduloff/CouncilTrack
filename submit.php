@@ -30,7 +30,7 @@
 			<select class="selector" name="id" form="submit-event-form">
 				<?php 
 					$conn = db_connect();
-					$stmt = $conn->prepare("SELECT same, name, id FROM tables WHERE 1");
+					$stmt = $conn->prepare("SELECT same, name, id FROM tables WHERE locked = 0");
 					if(!$stmt) {
 						echo "<p class=\"h3 text-center\"> Something went wrong. </p>";
 						try_again("submit.php");

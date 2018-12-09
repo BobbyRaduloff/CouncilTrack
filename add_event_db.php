@@ -43,11 +43,11 @@
 					$stmt->close();
 				}
 
-				$stmt = $conn->prepare("INSERT INTO tables (name, i, same, items) VALUES (?, ?, ?, ?)");
+				$stmt = $conn->prepare("INSERT INTO tables (name, i, same, items, locked) VALUES (?, ?, ?, ?, ?)");
 				if(!$stmt) {
 					goto wrong;
 				}
-				$stmt->bind_param("siis", $_POST["name"], $count, $same, $items);
+				$stmt->bind_param("siis", $_POST["name"], $count, $same, $items, 0);
 				$stmt->execute();
 				$id = $conn->insert_id;
 				$stmt->close();

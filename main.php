@@ -31,7 +31,7 @@
 					<button class="btn btn-lg btn-success btn-block" onclick="location.href='add_event.php';"> Add Event </button>
 				</div>
 				<div class="col mx-auto btn-ui">
-					<button class="btn btn-lg btn-danger btn-block" onclick="location.href='delete_event.php';"> Delete Event </button>
+					<button class="btn btn-lg btn-danger btn-block" onclick="location.href='delete_event.php';"> Delete/(Un)Lock Event </button>
 				</div>
 			</div>
 		<?php endif; ?>
