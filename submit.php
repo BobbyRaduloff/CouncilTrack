@@ -38,8 +38,13 @@
 					$stmt->execute();
 					$stmt->bind_result($same, $name, $id);
 					
+					$i = 0;
 					while($stmt->fetch()) {
+						$i++;
 						echo "<option value=\"$id\"> $name </option>";
+					}
+					if($i == 0) {
+						echo "</select> <p class=\"h3 text-center\"> There are no events. </p>";
 					}
 
 					$stmt->close();

@@ -13,6 +13,7 @@ This software was developed by:
 	- o.trajanov22@acsbg.org
 
 The idea was initally put forward by Martin Kirilov (ACS2020).
+The mailing system uses PHPMailer.
 
 ## Setup
 1. Download this repo in a folder in your web server directory.

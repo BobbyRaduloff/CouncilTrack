@@ -1,4 +1,11 @@
 <?php
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\Exception;
+
+	require 'PHPMailer/Exception.php';
+	require 'PHPMailer/PHPMailer.php';
+	require 'PHPMailer/SMTP.php';
+
 	function db_connect() {
 		$ini = parse_ini_file("config.ini");
 		$db_servername = $ini["location"];
@@ -47,6 +54,20 @@
 	}
 
 	function send_email($email, $subject, $txt) {
-		mail($email, $subject, $txt, "From: XXXXX@XXXXX.com");
+		$ini = parse_ini_file("config.ini");
+		$mail = new PHPMailer;
+		$mail->isSMTP();
+		$mail->SMTPDebug = 0;
+		$mail->Host = "smtp.gmail.com";
+		$mail->Port = 587;
+		$mail->SMTPSecure = "tls";
+		$mail->SMTPAuth = true;
+		$mail->Username = $ini["email"];
+		$mail->Password = $ini["epassword"];
+		$mail->setFrom($ini["email"], "CouncilTrack");
+		$mail->addAddress($email, "");
+		$mail->Subject = $subject;
+		$mail->Body = $txt;
+		var_dump($mail->send());
 	}
 ?>

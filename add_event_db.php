@@ -47,7 +47,8 @@
 				if(!$stmt) {
 					goto wrong;
 				}
-				$stmt->bind_param("siis", $_POST["name"], $count, $same, $items, 0);
+				$z = 0;
+				$stmt->bind_param("siisi", $_POST["name"], $count, $same, $items, $z);
 				$stmt->execute();
 				$id = $conn->insert_id;
 				$stmt->close();

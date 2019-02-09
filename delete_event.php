@@ -18,7 +18,9 @@
 			$conn = db_connect();
 			$GLOBALS["has"] = check_empty($conn, "tables");
 			if(!$GLOBALS["has"]) {
-				die("<p class=\"h3 text-center\"> There are no events. </p>");
+				echo("<p class=\"h3 text-center\"> There are no events. </p>");
+				include "back.html";
+				die();
 			}
 			$stmt = $conn->prepare("SELECT * FROM tables WHERE locked = 1");
 			$stmt->execute();

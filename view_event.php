@@ -76,7 +76,8 @@ EOF;
 					$stmt->close();
 				}
 				echo "<th scope=\"col\"> Total </th>";
-				echo "<th scope=\"col\"> Delivered </th>";
+				if(!$same)
+					echo "<th scope=\"col\"> Delivered </th>";
 				echo "</tr> <tbody>";
 				$stmt_string = "SELECT id, delivered, name, grade, section, ";
 				if($same == 0) {
@@ -156,11 +157,12 @@ EOF;
 					}
 					$max_total += $total;
 					echo "<td> ${total}lv. </td>";
-					echo ((($result[$i])["delivered"]) ? "<td> Yes </td>" : "<td id=\"" . "delivery" . ($result[$i])["id"]. "\"> No <button class=\"btn btn-success\" onclick=\"deliver(" . ($result[$i])["id"] . "," . $_POST["id"] . ")\"> Deliver </button></td>");
+					if(!$same)
+						echo ((($result[$i])["delivered"]) ? "<td> Yes </td>" : "<td id=\"" . "delivery" . ($result[$i])["id"]. "\"> No <button class=\"btn btn-success\" onclick=\"deliver(" . ($result[$i])["id"] . "," . $_POST["id"] . ")\"> Deliver </button></td>");
 					echo "</tr>";
 				}
-				echo "<tr> <td> </td> <td> </td> <td> </td>";
-				if($same == 0) {
+				echo "<tr> <td> </td> <td> </td>";
+				if(!$same) {
 					echo "<td> </td> <td> </td>";
 				}
 				for($i = 0; $i < $count; $i++) {

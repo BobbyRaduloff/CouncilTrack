@@ -43,7 +43,7 @@
 					$items[$i] = $iname;
 					$stmt->close();
 				}
-				$txt = "Dear ${r_name},\nYou have recieved the following from student council:\n";
+				$txt = "Dear ${r_name},\nYou have recieved the following from Student Council:\n";
 				for($i = 0; $i < count($item_array); $i++) {
 					$stmt = $conn->prepare("SELECT item" . $i . " FROM table" . $_POST["event"] . " WHERE id = ?");
 					$stmt->bind_param("i", $_POST["id"]);
@@ -55,13 +55,14 @@
 					}
 					$stmt->close();
 				}
-				$txt .= "Here's the note attached:\n";
+				$txt .= "\nHere's the note attached:\n";
 				$txt .= $message;
 				if(intval($anon)) {
 					$txt .= "\nby Anonymous";
 				} else {
-					$txt .= "\mby ${name}";
+					$txt .= "\nby ${name}";
 				}
+				$txt .= "\n\nIf this receipt is innacurate in regards to what you physically recieved, show it to a member of the Student Council.";
 				$conn->close();
 				send_email($r_email, "Council Track - Delviery", $txt);
 			} else {
