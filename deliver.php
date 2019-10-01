@@ -51,7 +51,7 @@
 					$stmt->bind_result($sale);
 					$stmt->fetch();
 					if($sale) {
-						$txt .= $iname . " x " . strval($sale) . "\n";
+						$txt .= $items[$i] . " x " . strval($sale) . "\n";
 					}
 					$stmt->close();
 				}
