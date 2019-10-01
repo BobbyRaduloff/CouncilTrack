@@ -34,6 +34,7 @@
 			$stmt->close();
 			$conn->close();
 		?>
+		<?php if($_SESSION['level'] < 2): ?>
 		<form id="delete-event-form" class="form-ct" action="delete_event_db.php" method="post" accept-charset="utf-8">
 			<p class="h2 text-center form-heading"> Delete Event </p>
 			<label for="id"> Event: </label>
@@ -58,6 +59,7 @@
 			</select>
 			<button class="btn btn-lg btn-danger btn-block btn-final" type="submit"> Delete </button>
 		</form>
+		<?php endif; ?>
 		<?php if($GLOBALS["unlocked"]): ?>
 			<hr>
 			<form id="lock-event-form" class="form-ct" action="lock_event.php" method="post" accept-charset="utf-8">
