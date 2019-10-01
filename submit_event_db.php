@@ -110,7 +110,7 @@
 				$stmt->execute();
 				$stmt->close();
 				
-				$txt = "Hello, ${_POST["name"]}!\n\nThis is an email receipt from the Student Council, notifying you of your purchases.\nYou bought:\n";
+				$txt = "Hello ${_POST["name"]},\n\nThis is your digital receipt from the Student Council, notifying you of your purchases.\n\nYou bought:\n";
 				$stmt = $conn->prepare("SELECT items from tables where id = ?");
 				$stmt->bind_param("i", intval($_POST["id"]));
 				$stmt->execute();
@@ -130,13 +130,15 @@
 				}
 				$total = 0;
 				for($i = 0; $i < $_POST["i"]; $i++) {
-					$txt .= $_POST["item".$i] . " x " . ($items[$i])[0] . "/s (" . ($items[$i])[1] . "lv.) = " . ($_POST["item".$i] * ($items[$i])[1]) . "lv.\n";
+					if(intval($_POST["item".$i]) > 0) {
+						$txt .= $_POST["item".$i] . " x " . ($items[$i])[0] . "/s (" . ($items[$i])[1] . "lv.) = " . ($_POST["item".$i] * ($items[$i])[1]) . "lv.\n";
+					}
 					$total += intval($_POST["item".$i]) * ($items[$i])[1];
 				}
 				$stmt = $conn->prepare("UPDATE users SET balance = balance + ? WHERE id = ?");
 				$stmt->bind_param("is", $total, $_SESSION["id"]);
 				$stmt->execute();
-				$txt .="\nYour total is ${total}lv.";
+				$txt .="\nYour total is ${total}lv.\n";
 				$txt .= "\nIf you did not make this purchase, show this receipt to a member of the Student Council. Do the same if you did, but the receipt is innacruate.";
 				send_email($to, "CouncilTrack - Receipt", $txt);
 				
