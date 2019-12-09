@@ -140,6 +140,9 @@ EOF;
 				}
 
 				for($i = 0; $i < count($result); $i++) {
+					if(isset($_POST["query"]) && !empty($_POST["query"]) && strlen($_POST["query"]) != strlen(($result[$i])["grade"] . "/" . ($result[$i])["section"])) {
+						continue;
+					}
 					$total = 0.0;
 					echo "<tr>";
 					echo "<th scope=\"row\"> ${i} </th>";
