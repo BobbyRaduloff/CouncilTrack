@@ -48,15 +48,33 @@
 			</select>
 			<button class="btn btn-lg btn-primary btn-block btn-final" type="submit"> Output </button>
 		</form>
-		<?php
-			if($_SESSION["level"] < 3) {
-				echo "<form id=\"view-event-form\" class=\"form-ct\" action=\"money.php\" method=\"post\" accept-charset=\"utf-8\">";
-				echo "<hr>";
-				echo "<p class=\"h2 text-center form-heading\" style=\"margin: 20px;\"> View Money </p>";
-				echo "<button class=\"btn btn-lg btn-primary btn-block btn-final\" value=\"money\" name=\"what\"> Money </button>";
-				echo "</form>";
-			}
-		?>
+		<?php endif; ?>
+		<?php if($_SESSION["level"] < 3) : ?>
+				<form id="view-money-form" class="form-ct" action="money.php" method="post" accept-charset="utf-8">
+				<hr>
+				<p class="h2 text-center form-heading" style="margin: 20px;"> View Money </p>
+				<label for="id"> Event: </label>
+				<select class="selector" name="id" form="view-money-form">
+					<?php 
+						$conn = db_connect();
+						$stmt = $conn->prepare("SELECT name, id FROM tables WHERE 1");
+						if(!$stmt) {
+							echo "<p class=\"h3 text-center\"> Something went wrong. </p>";
+							try_again("view.php");
+						}
+						$stmt->execute();
+						$stmt->bind_result($name, $id);
+						
+						while($stmt->fetch()) {
+							echo "<option value=\"$id\"> $name </option>";
+						}
+
+						$stmt->close();
+						$conn->close();
+					?>
+				</select>
+				<button class="btn btn-lg btn-primary btn-block btn-final" value="money" name="what"> Money </button>
+				</form>
 		<?php endif; ?>
 		<?php include "back.html"; ?>
 		<?php include "footer.html"; ?>

@@ -41,8 +41,9 @@
 				</thead>
 				<tbody>
 					<?php
+						$moneytable = "table" . $_POST["id"] . "m";
 						$conn = db_connect();
-						$stmt = $conn->prepare("SELECT id, name, balance FROM users WHERE 1");
+						$stmt = $conn->prepare("SELECT ${moneytable}.id, users.name, ${moneytable}.balance FROM ${moneytable} INNER JOIN users ON ${moneytable}.id = users.id");
 						if(!$stmt) {
 							wrong();
 						}
@@ -56,7 +57,7 @@
 							echo "<td> ${balance} </td>";
 							if($balance > 0) {
 								echo "<td id=\"delivery" . $id . "\">";
-								echo "<button class=\"btn btn-success\" onclick=\"deliver(${id})\"> Deliver </button>";
+								echo "<button class=\"btn btn-success\" onclick=\"deliver(${id}," . $_POST["id"] . ", ${balance})\"> Deliver </button>";
 								echo "</td>"; 
 							} else {
 								echo "<td> Nothing owed! </td>";

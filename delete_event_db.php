@@ -52,6 +52,9 @@
 				$stmt = $conn->prepare("DROP TABLE table".(string)$_POST["id"]);
 				$stmt->execute();
 				$stmt->close();
+				$stmt = $conn->prepare("DROP TABLE table".(string)$_POST["id"]."m");
+				$stmt->execute();
+				$stmt->close();
 				$conn->close();
 
 				header("Location: main.php");

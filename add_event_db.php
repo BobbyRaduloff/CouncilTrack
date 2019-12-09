@@ -78,7 +78,12 @@
 				$stmt->execute();
 				$stmt->close();
 
-				
+				$moneytable = $tablename . "m";
+				$query = "CREATE TABLE ${moneytable} (id int NOT NULL UNIQUE, balance int NOT NULL)";
+				$stmt = $conn->prepare($query);
+				$stmt->execute();
+				$stmt->close();
+
 				$conn->close();
 				header("Location: main.php");
 				wrong:

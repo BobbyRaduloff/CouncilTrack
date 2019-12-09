@@ -35,7 +35,7 @@
 				$stmt->execute();
 				$stmt->bind_result($real_pass, $level, $id);
 				$stmt->fetch();
-
+				var_dump($real_pass, $level, $id);
 				if(password_verify($_POST["password"], $real_pass)){
 					$_SESSION["username"] = $_POST["username"];
 					$_SESSION["id"] = $id;

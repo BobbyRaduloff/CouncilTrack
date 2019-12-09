@@ -22,8 +22,18 @@
 				try_again("delete_user.php");
 			} else {
 				$conn = db_connect();
-				$stmt = $conn->prepare("UPDATE users SET balance = 0 WHERE id = ?");
-				if(!stmt) {
+				$tablename = "table" . $_POST["event"] . "m";
+				$stmt = $conn->prepare("UPDATE users SET balance = balance - ? WHERE id = ?");
+				if(!$stmt) {
+					echo "<p class=\"h3 text-center\"> Something went wrong. </p>";
+					try_again("delete_user.php");
+				}
+				$stmt->bind_param("ii", $_POST["howmuch"], $_POST["id"]);
+				$stmt->execute();
+				$stmt->close();
+
+				$stmt = $conn->prepare("UPDATE ${tablename} SET balance = 0 WHERE id = ?");
+				if(!$stmt) {
 					echo "<p class=\"h3 text-center\"> Something went wrong. </p>";
 					try_again("delete_user.php");
 				}
