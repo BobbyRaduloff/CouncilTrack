@@ -20,10 +20,10 @@
 			if(empty($_POST["name"])) {
 				echo "<p class=\"h3 text-center\"> No name entered. </p>";
 				try_again("submit.php");
-			} elseif(empty($_POST["grade"])) {
+			} elseif(empty($_POST["grade"]) && empty($_POST["staff"])) {
 				echo "<p class=\"h3 text-center\"> No grade entered. </p>";
 				try_again("submit.php");
-			} elseif(empty($_POST["section"])) {
+			} elseif(empty($_POST["section"]) && empty($_POST["staff"])) {
 				echo "<p class=\"h3 text-ceter\"> No section entered. </p>";
 				try_again("submit.php");
 			} elseif(empty($_POST["i"])) {
@@ -42,13 +42,13 @@
 				}
 			}
 			if($_POST["same"] == 0) {
-				if(empty($_POST["r_grade"])) {
+				if(empty($_POST["r_grade"]) && empty($_POST["r_staff"])) {
 					echo "<p class=\"h3 text-center\"> You missed the recepient's grade. </p>";
 					try_again("submit.php");
 				} elseif(empty($_POST["r_name"])) {
 					echo "<p class=\"h3 text-center\"> You missed the recepient's name. </p>";
 					try_again("submit.php");
-				} elseif(empty($_POST["r_section"])) {
+				} elseif(empty($_POST["r_section"]) && empty($_POST["staff"])) {
 					echo "<p class=\"h3 text-center\"> You missed the recepient's section. </p>";
 					try_again("submit.php");
 				}
@@ -87,7 +87,11 @@
 				$param_array = array(((intval($_POST["same"]) == 0) ? "iiiissiiisss" : "iiiiss") . str_repeat("i", $count), 0, $_SESSION["id"], $_POST["grade"], $_POST["section"], $_POST["name"]);
 				$to;
 				if(empty($_POST["email"])) {
-					$to = email_gen($_POST["name"], intval($_POST["grade"]));
+					if(isset($_POST["staff"])) {
+						$to = staff_email_gen($_POST["name"]);
+					} else {
+						$to = email_gen($_POST["name"], intval($_POST["grade"]));
+					}
 					array_push($param_array, $to);
 				} else {
 					$to = $_POST["email"];
@@ -97,7 +101,11 @@
 					array_push($param_array, intval(isset($_POST["anonymous"])));
 					array_push($param_array, $_POST["r_grade"], $_POST["r_section"], $_POST["r_name"]);
 					if(empty($_POST["r_email"])) {
-						array_push($param_array, email_gen($_POST["r_name"], intval($_POST["r_grade"])));
+						if(isset($_POST["r_staff"])) {
+							array_push($param_array, staff_email_gen($_POST["r_name"]));
+						} else {
+							array_push($param_array, email_gen($_POST["r_name"], intval($_POST["r_grade"])));
+						}
 					} else {
 						array_push($param_array, $_POST["r_email"]);
 					}
@@ -109,7 +117,7 @@
 				$stmt->bind_param(...$param_array);
 				$stmt->execute();
 				$stmt->close();
-				
+
 				$txt = "Hello ${_POST["name"]},\n\nThis is your digital receipt from the Student Council, notifying you of your purchases.\n\nYou bought:\n";
 				$stmt = $conn->prepare("SELECT items from tables where id = ?");
 				$stmt->bind_param("i", intval($_POST["id"]));

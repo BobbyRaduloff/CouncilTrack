@@ -40,6 +40,14 @@
 				</div>
 			</div>
 			<div class="form-group row">
+				<div class="col">
+					<div class="form-check">
+						<input type="checkbox" name="staff" class="form-check-input" id="staff" value="No" onchange="toggleGrade();">
+						<label class="form-check-label" for="staff"> Staff </label>
+					</div>
+				</div>
+			</div>
+			<div id="b_grade" class="form-group row">
 				<label for="name" class="col-2 col-form-label"> Grade: </label>
 				<div class="col-3">
 					<input type="number" name="grade" class="form-control" placeholder="8" min="8" max="12" step="1">
@@ -78,6 +86,14 @@
 				</div>
 			</div>
 			<div class="form-group row">
+				<div class="col">
+					<div class="form-check">
+						<input type="checkbox" name="r_staff" class="form-check-input" id="r_staff" value="No" onchange="toggleGradeR();">
+						<label class="form-check-label" for="r_staff"> Staff </label>
+					</div>
+				</div>
+			</div>
+			<div id="re_grade" class="form-group row">
 				<label for="name" class="col-3 col-form-label"> Recepient Grade: </label>
 				<div class="col-3">
 					<input type="number" name="r_grade" class="form-control" placeholder="8" min="8" max="12" step="1">
@@ -113,8 +129,8 @@
 				if(!$stmt) {
 					wrong();
 				}
-				$stmt->bind_param("i", intval($_POST["id"]))
-;				$stmt->execute();
+				$stmt->bind_param("i", intval($_POST["id"]));
+				$stmt->execute();
 				$stmt->bind_result($items);
 				$stmt->fetch();
 				$item_array = explode(",", $items);

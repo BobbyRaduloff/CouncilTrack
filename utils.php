@@ -53,6 +53,12 @@
 		return $to;
 	}
 
+	function staff_email_gen($name) {	
+		$names = explode(" ", strtolower($name));
+		$to = ($names[0])[0] . "." . $names[1] . "@acsbg.org";
+		return $to;
+	}
+
 	function send_email($email, $subject, $txt) {
 		$ini = parse_ini_file("config.ini");
 		$mail = new PHPMailer;

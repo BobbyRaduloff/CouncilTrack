@@ -13,3 +13,21 @@ function calculatePrice(what, price) {
 	}
 	document.getElementById("total").innerHTML = sum.toFixed(2) + "lv.";
 }
+
+function toggleGrade() {
+	g = document.getElementById("b_grade");
+	if(g.style.display != "none") {
+		g.style.display = "none";
+	} else {
+		g.style.display = "flex";
+	}
+}
+
+function toggleGradeR() {
+	g = document.getElementById("re_grade");
+	if(g.style.display != "none") {
+		g.style.display = "none";
+	} else {
+		g.style.display = "flex";
+	}
+}
