@@ -89,13 +89,21 @@ EOF;
 						$stmt_string .= ", ";
 					}
 				}
+				
+				$issection = false;
 				if(isset($_POST["query"])) {
-					if(!intval($same)) {
-						$stmt_string .= " FROM table${_POST["id"]} WHERE name LIKE LOWER(?) OR recepient LIKE LOWER(?) OR r_grade LIKE LOWER(?) OR CONCAT(CONCAT(r_grade, \"/\"),  r_section) LIKE LOWER(?)";
+					$issection = boolval(strpos($_POST["query"], "/"));
+				}
+				if(isset($_POST["query"])) {
+					if($issection) {
+						if(!intval($same)) {
+							$stmt_string .= " FROM table${_POST["id"]} WHERE CONCAT(CONCAT(r_grade, \"/\"),  r_section) LIKE LOWER(?) OR CONCAT(CONCAT(grade, \"/\"), section) LIKE LOWER(?)";
+						} else {
+							$stmt_string .= " FROM table${_POST["id"]} WHERE CONCAT(CONCAT(grade, \"/\"), section) LIKE LOWER(?)";
+						}
 					} else {
-						$stmt_string .= " FROM table${_POST["id"]} WHERE name LIKE LOWER(?) OR grade LIKE LOWER(?) OR CONCAT(CONCAT(grade, \"/\"), section) LIKE LOWER(?)";
+						$stmt_string .= " FROM table${_POST["id"]} WHERE LOWER(name) LIKE LOWER(?) OR LOWER(recepient) LIKE LOWER(?)";
 					}
-					
 				} else {
 					$stmt_string .= " FROM table${_POST["id"]} where 1";
 				}
@@ -105,11 +113,16 @@ EOF;
 					wrong();
 				}
 				if(isset($_POST["query"])) {
-					$query = "%" . $_POST["query"] . "%";
-					if(!intval($same)) {
-						$stmt->bind_param("ssss", $query, $query, $query, $query);
+					if($issection) {
+						$query = "%" . $_POST["query"];
+						if(!intval($same)) {
+							$stmt->bind_param("ss",  $query, $query);
+						} else {
+							$stmt->bind_param("s", $query);
+						}
 					} else {
-						$stmt->bind_param("sss", $query, $query, $query);
+						$query = "%" . $_POST["query"] . "%";
+						$stmt->bind_param("ss", $query, $query);
 					}
 				}
 				$stmt->execute();
@@ -140,17 +153,22 @@ EOF;
 				}
 
 				for($i = 0; $i < count($result); $i++) {
-					if(isset($_POST["query"]) && !empty($_POST["query"]) && strlen($_POST["query"]) != strlen(($result[$i])["grade"] . "/" . ($result[$i])["section"])) {
-						continue;
-					}
 					$total = 0.0;
 					echo "<tr>";
 					echo "<th scope=\"row\"> ${i} </th>";
 					echo "<td> " . ($result[$i])["name"] ." </td>";
-					echo "<td> " . ($result[$i])["grade"] . "/" . ($result[$i])["section"] . " </td>";
+					if(($result[$i])["grade"] . "/" . ($result[$i])["section"] == "0/0") {
+						echo "<td> STAFF </td>"; 
+					} else {
+						echo "<td> " . ($result[$i])["grade"] . "/" . ($result[$i])["section"] . " </td>";
+					}
 					if($same == 0) {
 						echo "<td> " . ($result[$i])["recepient"] . " </td>";
-						echo "<td> " . ($result[$i])["r_grade"] . "/" . ($result[$i])["r_section"] . " </td>";
+						if(($result[$i])["r_grade"] . "/" . ($result[$i])["r_section"] == "0/0") {
+							echo "<td> STAFF </td>"; 
+						} else {
+							echo "<td> " . ($result[$i])["r_grade"] . "/" . ($result[$i])["r_section"] . " </td>";
+						}
 					}
 					for($j = 0; $j < $count; $j++) {
 						($totals[$j])[0] += ($item_array[$j])[1] * ($result[$i])["item".(string)$j];
