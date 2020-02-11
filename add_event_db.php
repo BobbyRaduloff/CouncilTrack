@@ -79,7 +79,7 @@
 				$stmt->close();
 
 				$moneytable = $tablename . "m";
-				$query = "CREATE TABLE ${moneytable} (id int NOT NULL UNIQUE, balance int NOT NULL)";
+				$query = "CREATE TABLE ${moneytable} (id int NOT NULL UNIQUE, balance double NOT NULL)";
 				$stmt = $conn->prepare($query);
 				$stmt->execute();
 				$stmt->close();

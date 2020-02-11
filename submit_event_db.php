@@ -145,20 +145,20 @@
 				$stmt->close();
 				if($rows == 0) {
 					$stmt = $conn->prepare("INSERT INTO ${moneytable} (id, balance) VALUES (?, ?)");
-					$stmt->bind_param("ii", intval($_SESSION["id"]), $total);
+					$stmt->bind_param("id", intval($_SESSION["id"]), $total);
 					$stmt->execute();
 					$stmt->close();
 					$stmt = $conn->prepare("UPDATE users SET balance = balance + ? WHERE id = ?");
-					$stmt->bind_param("ii", $total, intval($_SESSION["id"]));
+					$stmt->bind_param("di", $total, intval($_SESSION["id"]));
 					$stmt->execute();
 					$stmt->close();
 				} else {
 					$stmt = $conn->prepare("UPDATE ${moneytable} SET balance = balance + ? WHERE id = ?");
-					$stmt->bind_param("ii", $total, intval($_SESSION["id"]));
+					$stmt->bind_param("di", $total, intval($_SESSION["id"]));
 					$stmt->execute();
 					$stmt->close();
 					$stmt = $conn->prepare("UPDATE users SET balance = balance + ? WHERE id = ?");
-					$stmt->bind_param("ii", $total, intval($_SESSION["id"]));
+					$stmt->bind_param("di", $total, intval($_SESSION["id"]));
 					$stmt->execute();
 					$stmt->close();
 				}
